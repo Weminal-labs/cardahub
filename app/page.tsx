@@ -1,9 +1,7 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import SocialPage from "./social";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-8 items-center justify-center py-12 px-4 p-48:lg">
-      <ConnectButton accountStatus={{ smallScreen: 'avatar', largeScreen: 'full' }} />
-    </div>
+    <SocialPage />
   );
 }

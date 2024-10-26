@@ -7,8 +7,8 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "DApp Bootcamp Frontends",
-  description: "Interactive frontend for buildstation DApp bootcamp",
+  title: "Vent It",
+  description: "Vent every one in this app",
 };
 
 export default function RootLayout({
