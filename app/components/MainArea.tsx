@@ -1,6 +1,7 @@
 import React from 'react';
 import ReceivedMessages from './ReceivedMessages';
 import SentMessages from './SentMessages';
+import MessageComponent from './MessageComponent';
 
 interface MainAreaProps {
   messageFilterText: string;
@@ -21,7 +22,7 @@ const MainArea: React.FC<MainAreaProps> = ({ messageFilterText, onMessageFilterC
       {messages === 'received' ? (
         <ReceivedMessages filterText={messageFilterText} />
       ) : (
-        <SentMessages filterText={messageFilterText} />
+        <> <MessageComponent /><SentMessages filterText={messageFilterText} /></>
       )}
     </div>
   );
