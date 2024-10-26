@@ -12,6 +12,7 @@ const SocialPage = () => {
   const [messages, setMessages] = useState<'received' | 'sent'>('received');
 
   const toggleSidebar = () => {
+    console.log('Toggle Sidebar called');
     setIsSidebarActive(!isSidebarActive);
   };
 
@@ -24,13 +25,13 @@ const SocialPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen w-screen p-1">
       <Navbar
         toggleSidebar={toggleSidebar}
         showReceivedMessages={showReceivedMessages}
         showSentMessages={showSentMessages}
       />
-      <div className="container flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden">
         <Sidebar
           isActive={isSidebarActive}
           filterText={filterText}

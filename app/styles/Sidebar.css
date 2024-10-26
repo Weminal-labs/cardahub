@@ -1,0 +1,14 @@
+.left-side {
+    position: relative;
+    height: 100vh;
+}
+
+.resizer {
+    width: 5px; /* Make it wider if needed */
+    background-color: gray;
+    cursor: col-resize;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
