@@ -12,13 +12,6 @@ interface MainAreaProps {
 const MainArea: React.FC<MainAreaProps> = ({ messageFilterText, onMessageFilterChange, messages }) => {
   return (
     <div className="main-area bg-white flex-1 p-4 overflow-y-auto">
-      <input
-        type="text"
-        className="message-search w-full p-2 mb-4 border border-gray-300 rounded"
-        placeholder="Tìm kiếm tin nhắn..."
-        value={messageFilterText}
-        onChange={onMessageFilterChange}
-      />
       {messages === 'received' ? (
         <ReceivedMessages filterText={messageFilterText} />
       ) : (
