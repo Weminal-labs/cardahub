@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { useMessageContract } from '../hooks/useMessageContract';
+import { Message } from '../types/message';
 
 const MessageComponent = () => {
-  const { sendMessage, getMessages } = useMessageContract();
+  const { send, fetchMessages } = useMessageContract();
   const [recipient, setRecipient] = useState('');
   const [content, setContent] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const handleSendMessage = async () => {
-    await sendMessage(recipient, content);
+    await send(recipient, content);
   };
 
-  const handleGetMessages = async () => {
-    const msgs = await getMessages(recipient);
-    setMessages(msgs);
-  };
 
   return (
     <div>
@@ -31,7 +28,6 @@ const MessageComponent = () => {
         onChange={(e) => setContent(e.target.value)}
       />
       <button onClick={handleSendMessage}>Send Message</button>
-      <button onClick={handleGetMessages}>Get Messages</button>
       <div>
         {messages.map((msg, index) => (
           <div key={index}>

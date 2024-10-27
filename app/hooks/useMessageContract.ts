@@ -1,9 +1,9 @@
-import { useWriteContract, useReadContract, useWalletClient, usePublicClient, useAccount } from 'wagmi';
+import { useWriteContract, useReadContract, useAccount } from 'wagmi';
 import { contractABI } from './contractABI';
 
 export const useMessageContract = () => {
-    const provider = usePublicClient();
-    const { data: signer } = useWalletClient();
+    /* const provider = usePublicClient();
+    const { data: signer } = useWalletClient(); */
     
 
     const { refetch: getMessages } = useReadContract({
@@ -29,7 +29,7 @@ export const useMessageContract = () => {
         }
     };
 
-    const fetchMessages = async (searchAddress: string) => {
+    const fetchMessages = async (address: string) => {
         try {
             const { data } = await getMessages();
             return data;
