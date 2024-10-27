@@ -9,7 +9,7 @@ interface MainAreaProps {
   messages: 'received' | 'sent';
 }
 
-const MainArea: React.FC<MainAreaProps> = ({ messageFilterText, onMessageFilterChange, messages }) => {
+const MainArea: React.FC<MainAreaProps> = ({ messageFilterText, messages }) => {
   return (
     <div className="main-area bg-white flex-1 p-4 overflow-y-auto">
       {messages === 'received' ? (

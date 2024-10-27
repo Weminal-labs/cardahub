@@ -3,12 +3,13 @@ import { useMessageContract } from '../hooks/useMessageContract';
 import { Message } from '../types/message';
 
 const MessageComponent = () => {
-  const { send, fetchMessages } = useMessageContract();
+  const { send} = useMessageContract();
   const [recipient, setRecipient] = useState('');
   const [content, setContent] = useState('');
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages] = useState<Message[]>([]);
 
   const handleSendMessage = async () => {
+    // console.log('Sending message to', recipient);
     await send(recipient, content);
   };
 

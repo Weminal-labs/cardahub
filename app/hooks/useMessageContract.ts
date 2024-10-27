@@ -29,7 +29,7 @@ export const useMessageContract = () => {
         }
     };
 
-    const fetchMessages = async (address: string) => {
+    const fetchMessages = async () => {
         try {
             const { data } = await getMessages();
             return data;

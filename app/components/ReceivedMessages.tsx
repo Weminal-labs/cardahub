@@ -16,7 +16,7 @@ const ReceivedMessages: React.FC<ReceivedMessagesProps> = ({ filterText }) => {
   useEffect(() => {
     const loadMessages = async () => {
       if (address) {
-        const messages = await fetchMessages(address) as Message[] || []; // Ensure messages is an array
+        const messages = await fetchMessages() as Message[] || []; // Ensure messages is an array
         setReceivedMessages(messages);
       }
     };
