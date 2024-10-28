@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SendMessage } from '../hooks/writeContract'; // Import the SendMessage function
+import { SendMessage } from '../hooks/sendMessage'; // Import the SendMessage function
 
 interface SentMessagesProps {
   filterText: string;
