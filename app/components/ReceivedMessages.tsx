@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { useAccount } from 'wagmi';
 import { Message } from '../types/message';
-import { ReadContract } from '../hooks/getReceivedMessageessage'; // Import the ReadContract hook
+import { GetReceivedMessage } from '../hooks/getReceivedMessage'; // Import the ReadContract hook
 
 
 interface ReceivedMessagesProps {
@@ -10,7 +10,7 @@ interface ReceivedMessagesProps {
 
 const ReceivedMessages: React.FC<ReceivedMessagesProps> = ({ filterText }) => {
   //const { address } = useAccount(); // Get the current wallet address
-  const messages = ReadContract(); // Use the ReadContract hook to get messages
+  const messages = GetReceivedMessage(); // Use the ReadContract hook to get messages
 
   const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
 
