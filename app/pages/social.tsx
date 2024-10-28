@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
+// import Sidebar from '../components/Sidebar';
 import MainArea from '../components/MainArea';
 
 const SocialPage = () => {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
-  const [filterText, setFilterText] = useState('');
+  // const [filterText, setFilterText] = useState('');
   const [messageFilterText, setMessageFilterText] = useState('');
   const [messages, setMessages] = useState<'received' | 'sent'>('received');
 
@@ -32,11 +32,11 @@ const SocialPage = () => {
         showSentMessages={showSentMessages}
       />
       <div className="flex flex-1 overflow-hidden">
-        <Sidebar
+        {/* <Sidebar
           isActive={isSidebarActive}
           filterText={filterText}
           onFilterChange={(e) => setFilterText(e.target.value.toLowerCase())}
-        />
+        /> */}
         <MainArea
           messageFilterText={messageFilterText}
           onMessageFilterChange={(e) => setMessageFilterText(e.target.value.toLowerCase())}

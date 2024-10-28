@@ -1,5 +1,8 @@
-export const contractABI = [
+export const abi = [
     {
+        "name": "sendMessage",
+        "type": "function",
+        "stateMutability": "nonpayable",
         "inputs": [
             {
                 "internalType": "address",
@@ -12,12 +15,12 @@ export const contractABI = [
                 "type": "string"
             }
         ],
-        "name": "sendMessage",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
+        "outputs": []
     },
     {
+        "name": "getMessages",
+        "type": "function",
+        "stateMutability": "view",
         "inputs": [
             {
                 "internalType": "address",
@@ -25,7 +28,6 @@ export const contractABI = [
                 "type": "address"
             }
         ],
-        "name": "getMessages",
         "outputs": [
             {
                 "components": [
@@ -49,8 +51,61 @@ export const contractABI = [
                 "name": "",
                 "type": "tuple[]"
             }
-        ],
+        ]
+    },
+    {
+        "name": "getSentMessages",
+        "type": "function",
         "stateMutability": "view",
-        "type": "function"
+        "inputs": [],
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "sender",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "content",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "timestamp",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct MessageContract.Message[]",
+                "name": "",
+                "type": "tuple[]"
+            }
+        ]
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "content",
+                "type": "string"
+            }
+        ],
+        "name": "MessageSent",
+        "type": "event"
     }
-];
+] as const;
