@@ -30,26 +30,19 @@ export const abi = [
         ],
         "outputs": [
             {
-                "components": [
-                    {
-                        "internalType": "address",
-                        "name": "sender",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "content",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "timestamp",
-                        "type": "uint256"
-                    }
-                ],
-                "internalType": "struct MessageContract.Message[]",
-                "name": "",
-                "type": "tuple[]"
+                "internalType": "address[]",
+                "name": "senders",
+                "type": "address[]"
+            },
+            {
+                "internalType": "string[]",
+                "name": "contents",
+                "type": "string[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "timestamps",
+                "type": "uint256[]"
             }
         ]
     },

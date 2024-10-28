@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SendMessage } from '../hooks/sendMessage'; // Import the SendMessage function
 
 interface SentMessagesProps {
@@ -15,7 +15,7 @@ const SentMessages: React.FC<SentMessagesProps> = ({ filterText }) => {
     await send(recipient as `0x${string}`, content);
     setContent('');
   };
-  const [sentMessages, setSentMessages] = useState<{ sender: string; content: string; timestamp: string }[]>([]);
+  const [sentMessages] = useState<{ sender: string; content: string; timestamp: string }[]>([]);
  /*  useEffect(() => {
     const fetchSentMessages = async () => {
       try {

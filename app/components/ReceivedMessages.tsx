@@ -1,35 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode } from 'react';
 // import { useAccount } from 'wagmi';
-import { Message } from '../types/message';
-import { GetReceivedMessage } from '../hooks/getReceivedMessage'; // Import the ReadContract hook
-
+import { GetReceivedMessage } from '../hooks/getReceivedMessage';
 
 interface ReceivedMessagesProps {
   filterText: string;
 }
 
 const ReceivedMessages: React.FC<ReceivedMessagesProps> = ({ filterText }) => {
-  //const { address } = useAccount(); // Get the current wallet address
-  const messages = GetReceivedMessage(); // Use the ReadContract hook to get messages
+  // const { address } = useAccount();
+  const { data, error, isPending } = GetReceivedMessage();
 
-  const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
+  if (isPending) return <div>Loading...</div>;
+  if (error) return <div>Error loading messages</div>;
+  if (!data) return <div>No messages found</div>;
 
-  useEffect(() => {
-    if (Array.isArray(messages)) {
-      setReceivedMessages(messages);
-    }
-  }, [messages]);
+  const [senders, contents, timestamps] = data;
 
   return (
     <div>
-      <h2 className="text-gray-800 mb-4">Received</h2>
-      {receivedMessages.length > 0 ? (
-        receivedMessages
-          .filter(message => message.sender.toLowerCase().includes(filterText))
-          .map((message, index) => (
+      <h2 className="text-gray-800 mb-4">Received Messages</h2>
+      {senders.length > 0 ? (
+        senders
+          .map((sender: string, index: number) => ({
+            sender,
+            content: contents[index],
+            timestamp: new Date(Number(timestamps[index]) * 1000).toLocaleString(),
+          }))
+          .filter((message: { sender: string }) => message.sender.toLowerCase().includes(filterText.toLowerCase()))
+          .map((message: {
+            content: ReactNode; sender: string; timestamp: string 
+}, index: number) => (
             <div key={index} className="message bg-gray-200 p-2 mb-2 rounded">
-              <div className="username font-bold text-gray-800 mb-1">{message.sender}</div>
-              <div>{message.content}</div>
+              <div className="username font-bold text-gray-800 mb-1">
+                From: {message.sender}
+              </div>
+              <div className="content mb-1">{message.content}</div>
+              <div className="text-sm text-gray-600">{message.timestamp}</div>
             </div>
           ))
       ) : (
