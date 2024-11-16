@@ -5,8 +5,10 @@ import { ThemeToggle } from './ThemeToggle';
 const Navbar: React.FC = () => {
   return (
     <nav className="
+      sticky top-0 z-50 
       w-full 
-      bg-light-primary dark:bg-dark-primary 
+      bg-light-primary/80 dark:bg-dark-primary/80 
+      backdrop-blur-sm 
       border-b border-light-secondary dark:border-dark-secondary 
       shadow-sm
       p-4
