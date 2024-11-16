@@ -1,7 +1,7 @@
-import SocialPage from "./pages/social";
-
 export default function Home() {
   return (
-    <SocialPage />
+    <div>
+      <h1>Vent It</h1>
+    </div>
   );
 }

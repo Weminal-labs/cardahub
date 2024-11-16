@@ -1,27 +1,26 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import '@rainbow-me/rainbowkit/styles.css';
-import { Providers } from './providers';
-import './styles/globals.css';
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Vent It",
-  description: "Vent every one in this app",
-};
+import { ThemeProvider } from 'next-themes';
+import { ThemeToggle } from './components/ThemeToggle';
 
 export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers>
-          {children}   
-        </Providers>
-      </body>
-    </html>
-  );
+    children,
+}: {
+    children: React.ReactNode;
+}) {
+    return (
+        <html lang="en" suppressHydrationWarning>
+            <body>
+                <ThemeProvider attribute="class">
+                    <div className="min-h-screen bg-light-primary dark:bg-dark-primary text-light-text dark:text-dark-text">
+                        <nav className="p-4 flex justify-between items-center">
+                            <h1 className="text-2xl font-bold">My App</h1>
+                            <ThemeToggle />
+                        </nav>
+                        <main className="container mx-auto p-4">
+                            {children}
+                        </main>
+                    </div>
+                </ThemeProvider>
+            </body>
+        </html>
+    );
 }
