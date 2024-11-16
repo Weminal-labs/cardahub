@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo/Brand */}
         <div className="text-light-text dark:text-dark-text font-bold text-xl">
-          My dApp
+          Vent
         </div>
 
         {/* Right side: Wallet Connect & Theme Toggle */}
