@@ -5,6 +5,7 @@ import { WagmiProvider } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
 import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { UserProvider } from './UserProvider';
 
 const config = getDefaultConfig({
   appName: 'Vent It',
@@ -25,7 +26,9 @@ export function Providers({ children }: ProvidersProps) {
       <WagmiProvider config={config}>
         <RainbowKitProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
+            <UserProvider>
+              {children}
+            </UserProvider>
           </ThemeProvider>
         </RainbowKitProvider>
       </WagmiProvider>

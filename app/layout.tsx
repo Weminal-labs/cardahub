@@ -1,6 +1,6 @@
 import './styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
-import { Providers } from './providers';
+import { Providers } from './providers/Providers';
 import Navbar from './components/Navbar';
 
 export default function RootLayout({
