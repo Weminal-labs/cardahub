@@ -7,9 +7,10 @@ import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { UserProvider } from './UserProvider';
 
+const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
 const config = getDefaultConfig({
   appName: 'Vent It',
-  projectId: 'YOUR_PROJECT_ID',
+  projectId: projectId || '',
   chains: [mainnet, sepolia],
   ssr: true,
 });
