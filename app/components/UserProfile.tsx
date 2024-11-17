@@ -10,7 +10,6 @@ import Image from 'next/image';
 const UserProfile: React.FC = () => {
     const [userAddress, setUserAddress] = useState<string | null>(null);
     const { address, isConnected, avatar, username, bio } = useUserStore();
-    const chainId = useChainId();
 
     const { data: balanceData } = useBalance({
         address: userAddress as `0x${string}`,
