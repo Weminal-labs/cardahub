@@ -2,13 +2,15 @@
 
 import React, { useEffect, useState } from 'react';
 import { useUserStore } from '@/app/stores/useUserStore';
-import { useBalance, useChainId } from 'wagmi';
+import { useBalance } from 'wagmi';
 import { DocumentDuplicateIcon, UserIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
+import { Lightbox } from './Lightbox';
 
 const UserProfile: React.FC = () => {
     const [userAddress, setUserAddress] = useState<string | null>(null);
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const { address, isConnected, avatar, username, bio } = useUserStore();
 
     const { data: balanceData } = useBalance({
@@ -36,7 +38,12 @@ const UserProfile: React.FC = () => {
             {/* Profile Header with Avatar */}
             <div className="flex items-center gap-6 mb-8">
                 {/* Avatar Circle */}
-                <div className="relative w-24 h-24 rounded-full overflow-hidden bg-light-secondary dark:bg-dark-secondary flex items-center justify-center border-2 border-light-accent dark:border-dark-accent">
+                <div 
+                    className={`relative w-24 h-24 rounded-full overflow-hidden bg-light-secondary dark:bg-dark-secondary flex items-center justify-center border-2 border-light-accent dark:border-dark-accent ${
+                        avatar ? 'cursor-pointer hover:opacity-90 transition-opacity' : ''
+                    }`}
+                    onClick={() => avatar && setIsLightboxOpen(true)}
+                >
                     {avatar ? (
                         <Image
                             src={avatar as string}
@@ -94,6 +101,14 @@ const UserProfile: React.FC = () => {
                     </p>
                 </div>
             </div>
+
+            {/* Lightbox */}
+            {isLightboxOpen && avatar && (
+                <Lightbox
+                    imageUrl={avatar}
+                    onClose={() => setIsLightboxOpen(false)}
+                />
+            )}
         </div>
     );
 };
