@@ -1,9 +1,10 @@
 interface Post {
-    id: number;
-    title: string;
+    user: string;        // address
+    media: string;
     content: string;
-    author: string;
-    timestamp: string;
+    timestamp: number;   // uint256
+    commentCount: number; // uint256
+    comments?: Post[];   // optional vì mapping không trả về trong response
 }
 
 export type { Post };
