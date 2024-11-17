@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useAccount, useBalance, useChainId } from 'wagmi';
 import { useUserStore } from '@/app/stores/useUserStore';
+import { dummyUsers } from '@/seeder/user';
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
     const { address, isConnected } = useAccount();
@@ -15,7 +16,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         if (isConnected && address && chainId) {
-            setUser(address, chainId);
+            setUser(address, chainId, dummyUsers[0].avatar, dummyUsers[0].username, dummyUsers[0].bio);
         } else {
             clearUser();
         }

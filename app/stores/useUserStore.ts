@@ -9,7 +9,7 @@ interface UserState {
     balance: string | null;
     chainId: number | null;
     // Actions
-    setUser: (address: string, chainId: number) => void;
+    setUser: (address: string, chainId: number, avatar: string, username: string, bio: string) => void;
     clearUser: () => void;
     setBalance: (balance: string) => void;
 }
@@ -23,15 +23,21 @@ export const useUserStore = create<UserState>((set) => ({
     balance: null,
     chainId: null,
 
-    setUser: (address, chainId) => set({
+    setUser: (address, chainId, avatar, username, bio) => set({
         address,
         chainId,
+        avatar,
+        username,
+        bio,
         isConnected: true,
     }),
 
     clearUser: () => set({
         address: null,
         isConnected: false,
+        avatar: null,
+        username: null,
+        bio: null, 
         balance: null,
         chainId: null,
     }),

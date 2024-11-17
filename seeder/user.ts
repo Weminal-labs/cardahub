@@ -1,9 +1,10 @@
 import { User } from "@/app/types/user";
+import avatar from '@/public/AiAvatar.png'
 
 export const dummyUsers: User[] = [
     {
-        avatar: 'https://example.com/avatar.png',
-        username: 'John Doe',
+        avatar: avatar.src,
+        username: 'Menhythien',
         bio: 'I am a software engineer',
     }
 ];
