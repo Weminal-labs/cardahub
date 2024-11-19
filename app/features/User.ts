@@ -11,7 +11,7 @@ export function useCreateUser() {
         try {
             await writeContract({
                 abi: VentProfileABI,
-                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_PROFILE as `0x${string}`,
                 functionName: 'createUser',
                 args: [username, bio, avatar, dateToTimeStamp(birthday)],
             });
@@ -38,7 +38,7 @@ export function useDeleteUser() {
 
             const tx = await writeContract({
                 abi: VentProfileABI,
-                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_PROFILE as `0x${string}`,
                 functionName: 'deleteUser',
                 // Không cần truyền args nữa
                 args: [],
@@ -65,7 +65,7 @@ export function useUpdateUser() {
         try {
             await writeContract({
                 abi: VentProfileABI,
-                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_PROFILE as `0x${string}`,
                 functionName: 'updateUser',
                 args: [username, bio, avatar, dateToTimeStamp(birthday)],
             });
@@ -85,7 +85,7 @@ export function useUpdateUser() {
 
 export function useGetUser(address: string) {
     const { data, error, isLoading, isError } = useReadContract({
-        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_PROFILE as `0x${string}`,
         abi: VentProfileABI,
         functionName: "getUser",
         args: [address],
