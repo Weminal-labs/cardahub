@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { Lightbox } from '../shares/Lightbox';
 import CreateUserForm from './CreateUserForm';
+import DeleteUserButton from '../buttons/deleteUser.button';
 
 const UserProfile: React.FC = () => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -109,6 +110,19 @@ const UserProfile: React.FC = () => {
                     <p className="text-light-text dark:text-dark-text">
                         {userState.balance || '0'}
                     </p>
+                </div>
+            </div>
+
+            {/* Delete Profile Section */}
+            <div className="mt-8 pt-6 border-t border-light-secondary dark:border-dark-secondary">
+                <div className="space-y-2">
+                    <h2 className="text-lg font-semibold text-light-text dark:text-dark-text">
+                        Danger Zone
+                    </h2>
+                    <p className="text-sm text-light-text/70 dark:text-dark-text/70">
+                        Once you delete your profile, there is no going back. Please be certain.
+                    </p>
+                    <DeleteUserButton />
                 </div>
             </div>
 

@@ -29,6 +29,36 @@ export function useCreateUser() {
     };
 }
 
+export function useDeleteUser() {
+    const { writeContract, data, error, isPending } = useWriteContract();
+
+    const deleteUser = async () => {
+        try {
+            console.log('Attempting to delete user...');
+
+            const tx = await writeContract({
+                abi: VentProfileABI,
+                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+                functionName: 'deleteUser',
+                // Không cần truyền args nữa
+                args: [],
+            });
+
+            console.log('Transaction submitted:', tx);
+        } catch (err) {
+            console.error('Detailed error:', err);
+            throw err;
+        }
+    };
+
+    return {
+        deleteUser,
+        data,
+        error,
+        isPending
+    }
+}
+
 export function useGetUser(address: string) {
     const { data, error, isLoading, isError } = useReadContract({
         address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
