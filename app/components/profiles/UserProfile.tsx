@@ -5,7 +5,8 @@ import { UserContext } from '@/app/providers/UserProvider';
 import { DocumentDuplicateIcon, UserIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
-import { Lightbox } from './shares/Lightbox';
+import { Lightbox } from '../shares/Lightbox';
+import CreateUserForm from '../forms/CreateUserForm';
 
 const UserProfile: React.FC = () => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -26,9 +27,20 @@ const UserProfile: React.FC = () => {
     if (!jointTime) {
         return (
             <div className="flex flex-col items-center justify-center p-8">
-                <p className="text-light-text dark:text-dark-text">
-
+                <p className="text-light-text dark:text-dark-text mb-4">
+                    Your wallet is not connected to a profile yet
                 </p>
+
+                <button
+                    onClick={() => setIsLightboxOpen(true)}
+                    className="px-6 py-2 bg-light-accent dark:bg-dark-accent text-white rounded-lg hover:opacity-90 transition-all"
+                >
+                    Create Profile
+                </button>
+
+                {isLightboxOpen && (
+                    <CreateUserForm onClose={() => setIsLightboxOpen(false)} />
+                )}
             </div>
         );
     }
