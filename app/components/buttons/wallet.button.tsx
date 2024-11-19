@@ -1,17 +1,61 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Image from 'next/image';
-import { useUserStore } from '@/app/stores/useUserStore';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/outline';
 import { DocumentDuplicateIcon, UserIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { useAccount, useChainId, useBalance } from 'wagmi';
+import { UserContext } from '@/app/providers/UserProvider';
+import { useGetUser } from '@/app/features/User';
+import LoadingOverlay from '../LoadingOverlay';
 
 const WalletButton: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { balance } = useUserStore();
+    const { address, isConnected } = useAccount();
+    const { data: balanceData } = useBalance({
+        address: address as `0x${string}`,
+    });
+    const chainId = useChainId();
+    const { setUser, clearUser, userState } = useContext(UserContext);
+    const { data: userData, isLoading } = useGetUser(isConnected && address ? address : '');
+    React.useEffect(() => {
+        // Kiểm tra xem user vừa kết nối hay không
+        const justConnected = isConnected && !userState.isConnected;
+
+        // Nếu địa chỉ hoặc trạng thái kết nối thay đổi
+        if (userState.addr !== address || userState.isConnected !== isConnected) {
+            if (!isConnected) {
+                clearUser();
+            } else if (justConnected && !isLoading && userData) {
+                // Nếu vừa kết nối và đã có dữ liệu từ contract
+                setUser({
+                    ...userData,
+                    isConnected: true,
+                    chainId: chainId,
+                    balance: balanceData?.formatted || null
+                });
+            } else if (justConnected && !isLoading && !userData) {
+                // Nếu vừa kết nối nhưng chưa có dữ liệu từ contract
+                setUser({
+                    addr: address || null,
+                    isConnected: true,
+                    chainId: chainId,
+                    balance: balanceData?.formatted || null,
+                    name: null,
+                    avatar: null,
+                    bio: null,
+                    birthday: null,
+                    jointTime: null,
+                    n_follower: null,
+                    n_following: null
+                });
+            }
+        }
+    }, [address, isConnected, userData, isLoading, userState.addr, userState.isConnected, clearUser, setUser, chainId, balanceData?.formatted]);
+
 
     return (
         <ConnectButton.Custom>
@@ -23,8 +67,14 @@ const WalletButton: React.FC = () => {
                 openConnectModal,
                 mounted,
             }) => {
+                if (!mounted) return null;
+
+                if (isLoading) {
+                    return <LoadingOverlay />
+                }
                 const ready = mounted;
                 const connected = ready && account && chain;
+
 
                 if (!connected) {
                     return (
@@ -78,7 +128,7 @@ const WalletButton: React.FC = () => {
                                 {/* Balance */}
                                 <div className="p-3 border-t border-light-secondary dark:border-dark-secondary">
                                     <p className="text-sm text-light-text dark:text-dark-text">
-                                        Balance: {balance || account.displayBalance} ETH
+                                        Balance: {account.displayBalance} ETH
                                     </p>
                                 </div>
 

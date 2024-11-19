@@ -1,7 +1,12 @@
 interface User {
+    name: string;
     avatar: string;
-    username: string;
     bio: string;
+    birthday: number;
+    jointTime: number;
+    addr: string;
+    n_follower: number;
+    n_following: number;
 }
 
 export type { User };

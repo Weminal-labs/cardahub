@@ -1,32 +1,60 @@
-'use client';
+import { useContext, useState, ReactNode } from "react";
 
-import { useEffect } from 'react';
-import { useAccount, useBalance, useChainId } from 'wagmi';
-import { useUserStore } from '@/app/stores/useUserStore';
-import { dummyUsers } from '@/seeder/user';
+import { createContext } from "react";
+import { defaultUserState } from "../context/UserContext";
 
-export function UserProvider({ children }: { children: React.ReactNode }) {
-    const { address, isConnected } = useAccount();
-    const chainId = useChainId();
-    const { data: balance } = useBalance({
-        address: address as `0x${string}`,
-    });
+import { UserState } from "../context/UserContext";
 
-    const { setUser, clearUser, setBalance } = useUserStore();
+interface UserContextType {
+    userState: UserState;
+    setUser: (user: Partial<UserState>) => void;
+    clearUser: () => void;
+    setBalance: (balance: string) => void;
+}
 
-    useEffect(() => {
-        if (isConnected && address && chainId) {
-            setUser(address, chainId, dummyUsers[0].avatar, dummyUsers[0].username, dummyUsers[0].bio);
-        } else {
-            clearUser();
-        }
-    }, [isConnected, address, chainId, setUser, clearUser]);
+// Tạo context với type đã định nghĩa
+export const UserContext = createContext<UserContextType>({
+    userState: defaultUserState,
+    setUser: () => {},
+    clearUser: () => {},
+    setBalance: () => {},
+});
 
-    useEffect(() => {
-        if (balance) {
-            setBalance(balance.formatted);
-        }
-    }, [balance, setBalance]);
+// Provider component
+export function UserProvider({ children }: { children: ReactNode }) {
+    const [userState, setUserState] = useState<UserState>(defaultUserState);
 
-    return <>{children}</>;
+    const setUser = (user: Partial<UserState>) => {
+        setUserState(prev => ({ ...prev, ...user }));
+    };
+
+    const clearUser = () => {
+        setUserState(defaultUserState);
+    };
+
+    const setBalance = (balance: string) => {
+        setUserState(prev => ({ ...prev, balance }));
+    };
+
+    return (
+        <UserContext.Provider 
+            value={{
+                userState,
+                setUser,
+                clearUser,
+                setBalance,
+            }}
+        >
+            {children}
+        </UserContext.Provider>
+    );
+}
+
+// Custom hook để sử dụng context
+export function useUser() {
+    const context = useContext(UserContext);
+    if (!context) {
+        throw new Error('useUser must be used within a UserProvider');
+    }
+    return context;
 }

@@ -214,5 +214,59 @@ export const VentPostABI = [
         ],
         "stateMutability": "view",
         "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "users",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "avatar",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "bio",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "birthday",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "jointTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "n_follower",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "n_following",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
     }
-]
+] as const;

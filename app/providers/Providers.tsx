@@ -7,6 +7,7 @@ import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { UserProvider } from './UserProvider';
 
+
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
 const config = getDefaultConfig({
   appName: 'Vent It',
@@ -23,16 +24,16 @@ interface ProvidersProps {
 
 export function Providers({ children }: ProvidersProps) {
   return (
-    <QueryClientProvider client={queryClient}>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <WagmiProvider config={config}>
-        <RainbowKitProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <QueryClientProvider client={queryClient}>
+          <RainbowKitProvider>
             <UserProvider>
               {children}
             </UserProvider>
-          </ThemeProvider>
-        </RainbowKitProvider>
+          </RainbowKitProvider>
+        </QueryClientProvider>
       </WagmiProvider>
-    </QueryClientProvider>
+    </ThemeProvider>
   );
 }
