@@ -30,6 +30,45 @@ export const VentPostABI = [
     {
         "inputs": [
             {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "comments",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "media",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "content",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timestamp",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "string",
                 "name": "_media",
                 "type": "string"
@@ -47,11 +86,6 @@ export const VentPostABI = [
     },
     {
         "inputs": [
-            {
-                "internalType": "address",
-                "name": "postOwner",
-                "type": "address"
-            },
             {
                 "internalType": "uint256",
                 "name": "postId",
@@ -80,6 +114,25 @@ export const VentPostABI = [
                 "name": "",
                 "type": "string"
             },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "postId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getCommentCount",
+        "outputs": [
             {
                 "internalType": "uint256",
                 "name": "",
@@ -216,53 +269,12 @@ export const VentPostABI = [
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "users",
+        "inputs": [],
+        "name": "totalPosts",
         "outputs": [
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "avatar",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "bio",
-                "type": "string"
-            },
-            {
                 "internalType": "uint256",
-                "name": "birthday",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "jointTime",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "addr",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "n_follower",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "n_following",
+                "name": "",
                 "type": "uint256"
             }
         ],
