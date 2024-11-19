@@ -1,4 +1,4 @@
-import { useReadContracts, useWriteContract } from 'wagmi';
+import { useReadContract, useWriteContract } from 'wagmi';
 import { VentProfileABI } from '@/app/abis/VentProfile';
 import dotenv from 'dotenv';
 import { dateToTimeStamp } from '@/utils/dateParse';
@@ -30,31 +30,17 @@ export function useCreateUser() {
 }
 
 export function useGetUser(address: string) {
-    const { data, error, isLoading, isError } = useReadContracts({
-        contracts: [
-            {
-                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
-                abi: VentProfileABI,
-                functionName: "users",
-                args: [address],
-            },
-            {
-                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
-                abi: VentProfileABI,
-                functionName: "getUser",
-                args: [address],
-            }
-        ]
+    const { data, error, isLoading, isError } = useReadContract({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+        abi: VentProfileABI,
+        functionName: "getUser",
+        args: [address],
     });
 
-    console.log('Multicall results:', data);
-    console.log('Multicall error:', error);
-
     return {
-        data: data?.[1], // getUser result
-        mappingData: data?.[0], // users mapping result
+        data,
         error,
         isLoading,
-        isError
+        isError,
     }
 }

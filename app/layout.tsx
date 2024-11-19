@@ -3,7 +3,6 @@ import '@rainbow-me/rainbowkit/styles.css';
 import { Providers } from './providers/Providers';
 import Navbar from './components/Navbar';
 import { Toast } from './components/Toast';
-import DebugPanel from './components/shares/DebugPanel';
 
 export default function RootLayout({
   children,
@@ -22,7 +21,6 @@ export default function RootLayout({
             </main>
             <Toast />
           </div>
-          {process.env.NODE_ENV === 'development' && <DebugPanel />}
         </Providers>
       </body>
     </html>

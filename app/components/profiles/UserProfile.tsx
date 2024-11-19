@@ -6,7 +6,7 @@ import { DocumentDuplicateIcon, UserIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { Lightbox } from '../shares/Lightbox';
-import CreateUserForm from '../forms/CreateUserForm';
+import CreateUserForm from './CreateUserForm';
 
 const UserProfile: React.FC = () => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);

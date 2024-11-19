@@ -20,18 +20,8 @@ const WalletButton: React.FC = () => {
     });
     const chainId = useChainId();
     const { setUser, clearUser, userState } = useContext(UserContext);
-    const { data: userData, isLoading, isError, error } = useGetUser(isConnected && address ? address : '');
+    const { data: userData, isLoading } = useGetUser(isConnected && address ? address : '');
     React.useEffect(() => {
-        console.log('GetUser Status:', {
-            isLoading,
-            isError,
-            error,
-            userData
-        });
-
-        if (isError) {
-            toast.error(`Failed to fetch user data: ${error?.message}`);
-        }
         // Kiểm tra xem user vừa kết nối hay không
         const justConnected = isConnected && !userState.isConnected;
 
@@ -64,7 +54,7 @@ const WalletButton: React.FC = () => {
                 });
             }
         }
-    }, [address, isConnected, userData, isLoading, userState.addr, userState.isConnected, clearUser, setUser, chainId, balanceData?.formatted, isError, error]);
+    }, [address, isConnected, userData, isLoading, userState.addr, userState.isConnected, clearUser, setUser, chainId, balanceData?.formatted]);
 
 
     return (
