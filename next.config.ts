@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     config.externals.push('pino-pretty', 'lokijs', 'encoding');
     return config;
   },
+  images: {
+    domains: ['scontent.fsgn19-1.fna.fbcdn.net'],
+  },
 };
 
 export default nextConfig;

@@ -2,18 +2,20 @@
 
 import React, { useState, useContext } from 'react';
 import { UserContext } from '@/app/providers/UserProvider';
-import { DocumentDuplicateIcon, UserIcon } from '@heroicons/react/24/outline';
+import { DocumentDuplicateIcon, UserIcon, PencilIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { Lightbox } from '../shares/Lightbox';
-import CreateUserForm from './CreateUserForm';
+import UserForm from './UserForm';
 import DeleteUserButton from '../buttons/deleteUser.button';
+import { timeStampToDate } from '@/utils/dateParse';
 
 const UserProfile: React.FC = () => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [isEditFormOpen, setIsEditFormOpen] = useState(false);
     const { userState } = useContext(UserContext);
 
-    const { addr, isConnected, avatar, name, bio, jointTime } = userState;
+    const { addr, isConnected, avatar, name, bio, jointTime, birthday } = userState;
 
     if (!isConnected) {
         return (
@@ -40,42 +42,56 @@ const UserProfile: React.FC = () => {
                 </button>
 
                 {isLightboxOpen && (
-                    <CreateUserForm onClose={() => setIsLightboxOpen(false)} />
+                    <UserForm onClose={() => setIsLightboxOpen(false)} />
                 )}
             </div>
         );
     }
     return (
         <div className="max-w-2xl mx-auto p-6 bg-light-primary dark:bg-dark-primary rounded-lg shadow-lg">
-            {/* Profile Header with Avatar */}
-            <div className="flex items-center gap-6 mb-8">
-                {/* Avatar Circle */}
-                <div
-                    className={`relative w-24 h-24 rounded-full overflow-hidden bg-light-secondary dark:bg-dark-secondary flex items-center justify-center border-2 border-light-accent dark:border-dark-accent ${avatar ? 'cursor-pointer hover:opacity-90 transition-opacity' : ''
-                        }`}
-                    onClick={() => avatar && setIsLightboxOpen(true)}
-                >
-                    {avatar ? (
-                        <Image
-                            src={avatar}
-                            alt="User Avatar"
-                            fill
-                            className="object-cover"
-                        />
-                    ) : (
-                        <UserIcon className="w-12 h-12 text-light-text/50 dark:text-dark-text/50" />
-                    )}
+            {/* Profile Header with Avatar and Edit Button */}
+            <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-6">
+                    {/* Avatar Circle */}
+                    <div
+                        className={`relative w-24 h-24 rounded-full overflow-hidden bg-light-secondary dark:bg-dark-secondary flex items-center justify-center border-2 border-light-accent dark:border-dark-accent ${avatar ? 'cursor-pointer hover:opacity-90 transition-opacity' : ''
+                            }`}
+                        onClick={() => avatar && setIsLightboxOpen(true)}
+                    >
+                        {avatar ? (
+                            <Image
+                                src={avatar}
+                                alt="User Avatar"
+                                fill
+                                className="object-cover"
+                            />
+                        ) : (
+                            <UserIcon className="w-12 h-12 text-light-text/50 dark:text-dark-text/50" />
+                        )}
+                    </div>
+
+                    {/* User Info Header */}
+                    <div>
+                        <h1 className="text-2xl font-bold text-light-text dark:text-dark-text">
+                            {name || 'User Profile'}
+                        </h1>
+                        <p className="text-sm text-light-text/70 dark:text-dark-text/70">
+                            {bio || 'No bio'}
+                        </p>
+                        <p className="text-sm text-light-text/70 dark:text-dark-text/70">
+                            {birthday ? timeStampToDate(Number(birthday)).toLocaleDateString() : 'No birthday'}
+                        </p>
+                    </div>
                 </div>
 
-                {/* User Info Header */}
-                <div>
-                    <h1 className="text-2xl font-bold text-light-text dark:text-dark-text">
-                        {name || 'User Profile'}
-                    </h1>
-                    <p className="text-sm text-light-text/70 dark:text-dark-text/70">
-                        {bio || 'No bio'}
-                    </p>
-                </div>
+                {/* Edit Profile Button */}
+                <button
+                    onClick={() => setIsEditFormOpen(true)}
+                    className="p-2 hover:bg-light-accent/10 dark:hover:bg-dark-accent/10 rounded-lg transition-colors flex items-center gap-2 text-light-accent dark:text-dark-accent"
+                >
+                    <PencilIcon className="w-5 h-5" />
+                    <span>Edit Profile</span>
+                </button>
             </div>
 
             {/* Address Section */}
@@ -116,9 +132,6 @@ const UserProfile: React.FC = () => {
             {/* Delete Profile Section */}
             <div className="mt-8 pt-6 border-t border-light-secondary dark:border-dark-secondary">
                 <div className="space-y-2">
-                    <h2 className="text-lg font-semibold text-light-text dark:text-dark-text">
-                        Danger Zone
-                    </h2>
                     <p className="text-sm text-light-text/70 dark:text-dark-text/70">
                         Once you delete your profile, there is no going back. Please be certain.
                     </p>
@@ -126,11 +139,25 @@ const UserProfile: React.FC = () => {
                 </div>
             </div>
 
-            {/* Lightbox */}
+            {/* Lightbox for Avatar */}
             {isLightboxOpen && avatar && (
                 <Lightbox
                     imageUrl={avatar}
                     onClose={() => setIsLightboxOpen(false)}
+                />
+            )}
+
+            {/* Edit Profile Form */}
+            {isEditFormOpen && (
+                <UserForm
+                    mode="update"
+                    initialData={{
+                        name: name || '',
+                        avatar: avatar || '',
+                        bio: bio || '',
+                        birthday: timeStampToDate(Number(birthday) || 0) || new Date()
+                    }}
+                    onClose={() => setIsEditFormOpen(false)}
                 />
             )}
         </div>

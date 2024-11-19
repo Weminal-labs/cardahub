@@ -59,6 +59,30 @@ export function useDeleteUser() {
     }
 }
 
+export function useUpdateUser() {
+    const { writeContract, data, error, isPending } = useWriteContract();
+    const updateUser = async (username: string, bio: string, avatar: string, birthday: string) => {
+        try {
+            await writeContract({
+                abi: VentProfileABI,
+                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+                functionName: 'updateUser',
+                args: [username, bio, avatar, dateToTimeStamp(birthday)],
+            });
+        } catch (err) {
+            console.error('Error updating user:', err);
+            throw err;
+        }
+    };
+
+    return {
+        updateUser,
+        data,
+        error,
+        isPending
+    }
+}
+
 export function useGetUser(address: string) {
     const { data, error, isLoading, isError } = useReadContract({
         address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
