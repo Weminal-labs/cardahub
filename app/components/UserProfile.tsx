@@ -5,12 +5,12 @@ import { UserContext } from '@/app/providers/UserProvider';
 import { DocumentDuplicateIcon, UserIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
-import { Lightbox } from './Lightbox';
+import { Lightbox } from './shares/Lightbox';
 
 const UserProfile: React.FC = () => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const { userState } = useContext(UserContext);
-    
+
     const { addr, isConnected, avatar, name, bio, jointTime } = userState;
     console.log('profile userState', userState);
     if (!isConnected) {

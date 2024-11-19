@@ -3,7 +3,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import { Providers } from './providers/Providers';
 import Navbar from './components/Navbar';
 import { Toast } from './components/Toast';
-import DebugPanel from './components/DebugPanel';
+import DebugPanel from './components/shares/DebugPanel';
 
 export default function RootLayout({
   children,

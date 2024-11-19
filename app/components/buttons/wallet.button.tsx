@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 import { useAccount, useChainId, useBalance } from 'wagmi';
 import { UserContext } from '@/app/providers/UserProvider';
 import { useGetUser } from '@/app/features/User';
-import LoadingOverlay from '../LoadingOverlay';
+import LoadingOverlay from '../shares/LoadingOverlay';
 
 const WalletButton: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);

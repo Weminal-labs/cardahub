@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ThemeToggle } from './ThemeToggle';
+import { ThemeToggle } from './shares/ThemeToggle';
 import WalletButton from './buttons/wallet.button';
 import Link from 'next/link';
 import { HomeIcon } from '@heroicons/react/24/outline';
