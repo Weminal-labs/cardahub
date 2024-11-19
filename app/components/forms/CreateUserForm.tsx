@@ -24,10 +24,10 @@ const CreateUserForm: React.FC<CreateUserFormProps> = ({ onClose }) => {
                 formData.bio,
                 formData.birthday
             );
-            toast.success('Profile created successfully!');
+            toast.success('Call contract successfully!');
             onClose();
         } catch (error) {
-            toast.error('Failed to create profile');
+            toast.error('Failed to call contract');
             console.error(error);
         }
     };

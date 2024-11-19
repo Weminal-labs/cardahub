@@ -1,9 +1,7 @@
-import { useReadContract, useWriteContract } from 'wagmi';
+import { useReadContracts, useWriteContract } from 'wagmi';
 import { VentProfileABI } from '@/app/abis/VentProfile';
 import dotenv from 'dotenv';
-import { User } from '../types/user';
 import { dateToTimeStamp } from '@/utils/dateParse';
-
 dotenv.config();
 
 export function useCreateUser() {
@@ -32,29 +30,31 @@ export function useCreateUser() {
 }
 
 export function useGetUser(address: string) {
-    return useReadContract({
-        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
-        abi: VentProfileABI,
-        functionName: 'getUser',
-        args: [address as `0x${string}`],
-        query: {
-            enabled: !!address,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            select: (data: any): User | null => {
-                if (!data || data.length === 0) {
-                    return null;
-                }
-                return {
-                    name: data[0],
-                    avatar: data[1],
-                    bio: data[2],
-                    birthday: Number(data[3]),
-                    jointTime: Number(data[4]),
-                    addr: data[5],
-                    n_follower: Number(data[6]),
-                    n_following: Number(data[7])
-                };
+    const { data, error, isLoading, isError } = useReadContracts({
+        contracts: [
+            {
+                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+                abi: VentProfileABI,
+                functionName: "users",
+                args: [address],
+            },
+            {
+                address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+                abi: VentProfileABI,
+                functionName: "getUser",
+                args: [address],
             }
-        }
+        ]
     });
+
+    console.log('Multicall results:', data);
+    console.log('Multicall error:', error);
+
+    return {
+        data: data?.[1], // getUser result
+        mappingData: data?.[0], // users mapping result
+        error,
+        isLoading,
+        isError
+    }
 }

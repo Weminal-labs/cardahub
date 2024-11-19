@@ -13,7 +13,7 @@ const UserProfile: React.FC = () => {
     const { userState } = useContext(UserContext);
 
     const { addr, isConnected, avatar, name, bio, jointTime } = userState;
-    console.log('profile userState', userState);
+
     if (!isConnected) {
         return (
             <div className="flex flex-col items-center justify-center p-8">
