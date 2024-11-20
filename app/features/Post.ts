@@ -1,6 +1,22 @@
 import { useReadContract } from 'wagmi';
 import { VentPostABI } from '@/app/abis/VentPost';
 
+
+export function useGetPostCount(address: string) {
+    const { data, error, isLoading } = useReadContract({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_POST as `0x${string}`,
+        abi: VentPostABI,
+        functionName: "getPostCount",
+        args: [address as `0x${string}`],
+    });
+
+    return {
+        data,
+        error,
+        isLoading
+    }
+}
+
 export function useGetUserPosts(address: string, postId: number) {
     const { data, error, isLoading } = useReadContract({
         address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_POST as `0x${string}`,

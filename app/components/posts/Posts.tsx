@@ -1,8 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useGetUserPosts } from '@/app/features/Post';
-import PostCard from '@/app/components/posts/PostCard';
+import { useGetPostCount } from '@/app/features/Post';
 import { Spinner } from '@/app/components/shares/Spinner';
 
 interface UserPostsProps {
@@ -10,8 +8,8 @@ interface UserPostsProps {
 }
 
 const UserPosts: React.FC<UserPostsProps> = ({ address }) => {
-    const { data: posts, isLoading, error } = useGetUserPosts(address);
-
+    const { data, isLoading, error } = useGetPostCount(address);
+    
     if (isLoading) {
         return (
             <div className="flex justify-center items-center py-8">
@@ -28,7 +26,7 @@ const UserPosts: React.FC<UserPostsProps> = ({ address }) => {
         );
     }
 
-    if (!posts || posts.length === 0) {
+    if (!data || Number(data) === 0) {
         return (
             <div className="text-center py-8 text-light-text/70 dark:text-dark-text/70">
                 No posts yet
@@ -42,9 +40,9 @@ const UserPosts: React.FC<UserPostsProps> = ({ address }) => {
                 Posts
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
-                {posts.map((post) => (
+                {/* {data.map((post) => (
                     <PostCard key={post.id} post={post} />
-                ))}
+                ))} */}
             </div>
         </div>
     );

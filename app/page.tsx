@@ -1,9 +1,9 @@
-import { Post } from "./components/posts/Posts";
+import UserProfile from "./components/profiles/UserProfile";
 
 export default function Home() {
   return (
     <div>
-      <Post />
+      <UserProfile />
     </div>
   );
 }
