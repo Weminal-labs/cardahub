@@ -17,7 +17,6 @@ export default function ProfilePage() {
     }
 
     const isOwnProfile = (address === addr);
-    console.log('page param: ', address);
     return (
         <div className="container mx-auto py-8">
             <UserProfile address={address as string} isOwnProfile={isOwnProfile} />

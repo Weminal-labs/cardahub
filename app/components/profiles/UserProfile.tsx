@@ -140,7 +140,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ address, isOwnProfile }) => {
                             Balance
                         </label>
                         <p className="text-light-text dark:text-dark-text">
-                            {userState.balance || '0'}
+                            {userState.balance || '0'} ETH
                         </p>
                     </div>
                 </div>
