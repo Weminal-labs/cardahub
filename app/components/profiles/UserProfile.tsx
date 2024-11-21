@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { Lightbox } from '../shares/Lightbox';
 import UserForm from './UserForm';
-import DeleteUserButton from '../buttons/deleteUser.button';
 import { timeStampToDate } from '@/utils/dateParse';
 import { useGetUser } from '@/app/features/User';
 import { User } from '@/app/types/user';
@@ -150,12 +149,6 @@ const UserProfile: React.FC<UserProfileProps> = ({ address, isOwnProfile }) => {
             {/* Delete Profile Section */}
             {isOwnProfile && (
                 <div className="mt-8 pt-6 border-t border-light-secondary dark:border-dark-secondary">
-                    <div className="space-y-2">
-                        <p className="text-sm text-light-text/70 dark:text-dark-text/70">
-                            Once you delete your profile, there is no going back. Please be certain.
-                        </p>
-                        <DeleteUserButton />
-                    </div>
                     <CreatePostButton />
                 </div>
             )}
