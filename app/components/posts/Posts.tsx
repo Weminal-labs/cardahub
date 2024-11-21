@@ -12,11 +12,7 @@ const UserPosts: React.FC<UserPostsProps> = ({ address }) => {
     const { data: postCount, isLoading, error } = useGetPostCount(address);
 
     if (isLoading) {
-        return (
-            <div className="flex justify-center items-center py-8">
-                <Spinner />
-            </div>
-        );
+        return <Spinner />;
     }
 
     if (error) {
@@ -36,11 +32,17 @@ const UserPosts: React.FC<UserPostsProps> = ({ address }) => {
     }
 
     return (
-        <div className="space-y-6">
-            <h2 className="text-xl font-semibold text-light-text dark:text-dark-text">
-                Posts
-            </h2>
-            <div className="grid gap-6 md:grid-cols-2">
+        <div className="max-w-2xl mx-auto p-6 bg-light-primary dark:bg-dark-primary rounded-lg shadow-lg">
+            <div className="mb-8">
+                <h2 className="text-2xl font-bold text-light-text dark:text-dark-text">
+                    Posts
+                </h2>
+                <p className="text-sm text-light-text/70 dark:text-dark-text/70">
+                    Total posts: {Number(postCount)}
+                </p>
+            </div>
+
+            <div className="space-y-4">
                 {Array.from({ length: Number(postCount) }, (_, index) => (
                     <PostItem key={index} address={address} postId={index} />
                 ))}
@@ -54,7 +56,9 @@ const PostItem = ({ address, postId }: { address: string; postId: number }) => {
     const { data, isLoading } = useGetPost(address, postId);
 
     if (isLoading) {
-        return <div className="h-48 animate-pulse bg-light-border dark:bg-dark-border rounded-lg" />;
+        return (
+            <div className="h-48 animate-pulse bg-light-border dark:bg-dark-border rounded-lg" />
+        );
     }
 
     if (!data) {
