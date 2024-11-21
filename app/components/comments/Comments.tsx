@@ -5,6 +5,7 @@ import { Spinner } from "../shares/Spinner";
 import { useState, useEffect } from "react";
 import { useAddComment } from "@/app/features/Post";
 import { toast } from "react-hot-toast";
+import CommentCard from "./CommentCard";
 
 interface PostCommentsProps {
     isOpen: boolean;
@@ -43,7 +44,7 @@ const PostComments: React.FC<PostCommentsProps> = ({ isOpen, onClose, globalPost
                         <p className="text-light-text/70 dark:text-dark-text/70 mb-6">
                             Sorry, we couldn&apos;t load the comments. Please try refreshing the page.
                         </p>
-                        <button 
+                        <button
                             onClick={() => window.location.reload()}
                             className="px-4 py-2 bg-light-accent dark:bg-dark-accent text-white rounded-lg hover:opacity-90"
                         >
@@ -56,7 +57,7 @@ const PostComments: React.FC<PostCommentsProps> = ({ isOpen, onClose, globalPost
     }
 
     const handleComment = async (content: string) => {
-        addComment(address, postId, globalPostId, "", content);    
+        addComment(address, postId, globalPostId, "", content);
     }
 
     return (
@@ -85,7 +86,7 @@ const PostComments: React.FC<PostCommentsProps> = ({ isOpen, onClose, globalPost
                     {/* Add Comment Section */}
                     <div className="mb-4">
                         {!showCommentForm ? (
-                            <button 
+                            <button
                                 onClick={() => setShowCommentForm(true)}
                                 className="px-4 py-2 bg-light-accent dark:bg-dark-accent text-white rounded-lg hover:opacity-90"
                             >
@@ -101,14 +102,14 @@ const PostComments: React.FC<PostCommentsProps> = ({ isOpen, onClose, globalPost
                                     rows={3}
                                 />
                                 <div className="flex gap-2 mt-2">
-                                    <button 
+                                    <button
                                         onClick={() => handleComment(commentContent)}
                                         disabled={isPending || !commentContent.trim()}
                                         className="px-4 py-2 bg-light-accent dark:bg-dark-accent text-white rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isPending ? 'Posting...' : 'Post Comment'}
                                     </button>
-                                    <button 
+                                    <button
                                         onClick={() => setShowCommentForm(false)}
                                         disabled={isPending}
                                         className="px-4 py-2 bg-light-secondary dark:bg-dark-secondary text-light-text dark:text-dark-text rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -127,8 +128,14 @@ const PostComments: React.FC<PostCommentsProps> = ({ isOpen, onClose, globalPost
 
                     {/* Comments List */}
                     {commentCount && Number(commentCount) > 0 && (
-                        <div className="space-y-4">
-                            <p className="text-light-text dark:text-dark-text">Loading comments...</p>
+                        <div className="space-y-4 mt-6 max-h-[400px] overflow-y-auto">
+                            {[...Array(Number(commentCount))].map((_, index) => (
+                                <CommentCard
+                                    key={index}
+                                    globalId={globalPostId}
+                                    commentId={index}
+                                />
+                            ))}
                         </div>
                     )}
                 </div>
@@ -136,5 +143,4 @@ const PostComments: React.FC<PostCommentsProps> = ({ isOpen, onClose, globalPost
         </div>
     );
 };
-
 export default PostComments;

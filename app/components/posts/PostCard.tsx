@@ -5,7 +5,7 @@ import { timeStampToDate } from '@/utils/dateParse';
 import { useGetPost } from '@/app/features/Post';
 import { Spinner } from '../shares/Spinner';
 import { useState } from 'react';
-import PostComments from './PostComments';
+import PostComments from '../comments/Comments';
 
 interface PostCardProps {
     address: string;
