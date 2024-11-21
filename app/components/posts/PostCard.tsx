@@ -13,7 +13,7 @@ interface PostCardProps {
 
 const PostCard: React.FC<PostCardProps> = ({ address, postId }) => {
     const { data, isLoading, error } = useGetPost(address, postId) as {
-        data: readonly [`0x${string}`, string, string, bigint, bigint] | undefined,
+        data: readonly [bigint,`0x${string}`, string, string, bigint, bigint] | undefined,
         isLoading: boolean,
         error: Error | null
     };
@@ -22,7 +22,7 @@ const PostCard: React.FC<PostCardProps> = ({ address, postId }) => {
     if (error) return <div>Error loading post</div>;
     if (!data) return null;
 
-    const [author, content, media, timestamp, commentCount] = data;
+    const [globalId, author, content, media, timestamp, commentCount] = data;
 
     return (
         <div className="bg-light-primary dark:bg-dark-primary rounded-lg shadow-md overflow-hidden border border-light-border dark:border-dark-border hover:border-light-accent dark:hover:border-dark-accent transition-colors">
