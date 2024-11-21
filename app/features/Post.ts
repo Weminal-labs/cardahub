@@ -1,6 +1,8 @@
-import { useReadContract } from 'wagmi';
+import { useReadContract, useWriteContract } from 'wagmi';
 import { VentPostABI } from '@/app/abis/VentPost';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 export function useGetPostCount(address: string) {
     const { data, error, isLoading } = useReadContract({
@@ -42,4 +44,23 @@ export function useGetUserPosts(address: string, postId: number) {
         error,
         isLoading
     };
+}
+
+export function useCreatePost(content: string, imageUrl: string) {
+    const { writeContract, data, error, isPending } = useWriteContract();
+    const createPost = async () => {
+        await writeContract({
+            address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_POST as `0x${string}`,
+            abi: VentPostABI,
+            functionName: "createPost",
+            args: [content, imageUrl],
+        });
+    };
+
+    return {
+        createPost,
+        data,
+        error,
+        isPending
+    }
 }
