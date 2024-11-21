@@ -9,7 +9,7 @@ interface UserPostsProps {
 
 const UserPosts: React.FC<UserPostsProps> = ({ address }) => {
     const { data, isLoading, error } = useGetPostCount(address);
-    
+
     if (isLoading) {
         return (
             <div className="flex justify-center items-center py-8">
@@ -40,9 +40,7 @@ const UserPosts: React.FC<UserPostsProps> = ({ address }) => {
                 Posts
             </h2>
             <div className="grid gap-6 md:grid-cols-2">
-                {/* {data.map((post) => (
-                    <PostCard key={post.id} post={post} />
-                ))} */}
+                you have {data} posts
             </div>
         </div>
     );

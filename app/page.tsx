@@ -1,9 +1,9 @@
-import UserProfile from "./components/profiles/UserProfile";
+'use client'
 
 export default function Home() {
   return (
     <div>
-      <UserProfile />
+      welcome
     </div>
   );
 }

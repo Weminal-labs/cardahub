@@ -9,13 +9,36 @@ import { Lightbox } from '../shares/Lightbox';
 import UserForm from './UserForm';
 import DeleteUserButton from '../buttons/deleteUser.button';
 import { timeStampToDate } from '@/utils/dateParse';
+import { useGetUser } from '@/app/features/User';
+import { User } from '@/app/types/user';
+import { Spinner } from '../shares/Spinner';
+interface UserProfileProps {
+    address?: string;    // Optional vì có thể xem profile của chính mình
+    isOwnProfile?: boolean;  // Để biết có phải profile của user hiện tại không
+}
 
-const UserProfile: React.FC = () => {
+const UserProfile: React.FC<UserProfileProps> = ({ address, isOwnProfile }) => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+    const { data: userData, isLoading, error } = useGetUser(address) as { data: User | null, isLoading: boolean, error: Error | null };
     const { userState } = useContext(UserContext);
 
-    const { addr, isConnected, avatar, name, bio, jointTime, birthday } = userState;
+    const { addr, isConnected } = userState;
+    let { avatar, name, bio, jointTime, birthday } = userState;
+
+    if (isLoading) {
+        return <Spinner />;
+    }
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
+    if (!isOwnProfile && userData) {
+        avatar = userData.avatar;
+        name = userData.name;
+        bio = userData.bio;
+        birthday = userData.birthday;
+        jointTime = userData.jointTime;
+    }
 
     if (!isConnected) {
         return (
@@ -85,59 +108,65 @@ const UserProfile: React.FC = () => {
                 </div>
 
                 {/* Edit Profile Button */}
-                <button
-                    onClick={() => setIsEditFormOpen(true)}
-                    className="p-2 hover:bg-light-accent/10 dark:hover:bg-dark-accent/10 rounded-lg transition-colors flex items-center gap-2 text-light-accent dark:text-dark-accent"
-                >
-                    <PencilIcon className="w-5 h-5" />
-                    <span>Edit Profile</span>
-                </button>
+                {isOwnProfile && (
+                    <button
+                        onClick={() => setIsEditFormOpen(true)}
+                        className="p-2 hover:bg-light-accent/10 dark:hover:bg-dark-accent/10 rounded-lg transition-colors flex items-center gap-2 text-light-accent dark:text-dark-accent"
+                    >
+                        <PencilIcon className="w-5 h-5" />
+                        <span>Edit Profile</span>
+                    </button>
+                )}
             </div>
 
             {/* Address Section */}
-            <div className="space-y-6">
-                <div className="bg-light-secondary dark:bg-dark-secondary p-4 rounded-lg">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <label className="text-sm text-light-text/70 dark:text-dark-text/70">
-                                Wallet Address
-                            </label>
-                            <p className="text-light-text dark:text-dark-text font-mono">
-                                {addr}
-                            </p>
+            {isOwnProfile && (
+                <div className="space-y-6">
+                    <div className="bg-light-secondary dark:bg-dark-secondary p-4 rounded-lg">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <label className="text-sm text-light-text/70 dark:text-dark-text/70">
+                                    Wallet Address
+                                </label>
+                                <p className="text-light-text dark:text-dark-text font-mono">
+                                    {addr}
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    // navigator.clipboard.writeText(addr);
+                                    toast.success('Address copied to clipboard!');
+                                }}
+                                className="p-2 hover:bg-light-accent/10 dark:hover:bg-dark-accent/10 rounded-full transition-colors"
+                            >
+                                <DocumentDuplicateIcon className="w-5 h-5 text-light-accent dark:text-dark-accent" />
+                            </button>
                         </div>
-                        <button
-                            onClick={() => {
-                                // navigator.clipboard.writeText(addr);
-                                toast.success('Address copied to clipboard!');
-                            }}
-                            className="p-2 hover:bg-light-accent/10 dark:hover:bg-dark-accent/10 rounded-full transition-colors"
-                        >
-                            <DocumentDuplicateIcon className="w-5 h-5 text-light-accent dark:text-dark-accent" />
-                        </button>
+                    </div>
+
+                    {/* Balance Section */}
+                    <div className="bg-light-secondary dark:bg-dark-secondary p-4 rounded-lg">
+                        <label className="text-sm text-light-text/70 dark:text-dark-text/70">
+                            Balance
+                        </label>
+                        <p className="text-light-text dark:text-dark-text">
+                            {userState.balance || '0'}
+                        </p>
                     </div>
                 </div>
-
-                {/* Balance Section */}
-                <div className="bg-light-secondary dark:bg-dark-secondary p-4 rounded-lg">
-                    <label className="text-sm text-light-text/70 dark:text-dark-text/70">
-                        Balance
-                    </label>
-                    <p className="text-light-text dark:text-dark-text">
-                        {userState.balance || '0'}
-                    </p>
-                </div>
-            </div>
+            )}
 
             {/* Delete Profile Section */}
-            <div className="mt-8 pt-6 border-t border-light-secondary dark:border-dark-secondary">
-                <div className="space-y-2">
-                    <p className="text-sm text-light-text/70 dark:text-dark-text/70">
-                        Once you delete your profile, there is no going back. Please be certain.
-                    </p>
-                    <DeleteUserButton />
+            {isOwnProfile && (
+                <div className="mt-8 pt-6 border-t border-light-secondary dark:border-dark-secondary">
+                    <div className="space-y-2">
+                        <p className="text-sm text-light-text/70 dark:text-dark-text/70">
+                            Once you delete your profile, there is no going back. Please be certain.
+                        </p>
+                        <DeleteUserButton />
+                    </div>
                 </div>
-            </div>
+            )}
 
             {/* Lightbox for Avatar */}
             {isLightboxOpen && avatar && (
