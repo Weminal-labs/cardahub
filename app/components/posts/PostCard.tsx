@@ -1,47 +1,64 @@
+'use client';
+
 import Image from 'next/image';
 import { timeStampToDate } from '@/utils/dateParse';
-import { HeartIcon } from '@heroicons/react/24/outline';
+import { useGetPost } from '@/app/features/Post';
+import { Spinner } from '../shares/Spinner';
+
 
 interface PostCardProps {
-    post: {
-        id: string;
-        content: string;
-        imageUrl?: string;
-        timestamp: number;
-        author: string;
-        likes: number;
-    };
+    address: string;
+    postId: number;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ post }) => {
+const PostCard: React.FC<PostCardProps> = ({ address, postId }) => {
+    const { data, isLoading, error } = useGetPost(address, postId) as {
+        data: readonly [`0x${string}`, string, string, bigint, bigint] | undefined,
+        isLoading: boolean,
+        error: Error | null
+    };
+
+    if (isLoading) return <Spinner />;
+    if (error) return <div>Error loading post</div>;
+    if (!data) return null;
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [author, content, media, timestamp, commentCount] = data;
+    console.log('post', data);
     return (
         <div className="bg-light-primary dark:bg-dark-primary rounded-lg shadow-md overflow-hidden">
-            {/* Post Image */}
-            {post.imageUrl && (
+            {/* Author */}
+            {/* <div className="p-4 border-b border-light-border dark:border-dark-border">
+                <span className="text-sm text-light-text/70 dark:text-dark-text/70">
+                    {author}
+                </span>
+            </div> */}
+
+            {/* Media */}
+            {media && media !== "" && (
                 <div className="relative h-48 w-full">
                     <Image
-                        src={post.imageUrl}
-                        alt="Post image"
+                        src={media}
+                        alt="Post media"
                         fill
                         className="object-cover"
                     />
                 </div>
             )}
 
-            {/* Post Content */}
+            {/* Content */}
             <div className="p-4">
                 <p className="text-light-text dark:text-dark-text mb-2">
-                    {post.content}
+                    {content}
                 </p>
 
-                {/* Post Meta */}
+                {/* Meta */}
                 <div className="flex items-center justify-between text-sm text-light-text/70 dark:text-dark-text/70">
                     <span>
-                        {timeStampToDate(post.timestamp).toLocaleDateString()}
+                        {timeStampToDate(Number(timestamp)).toLocaleDateString()}
                     </span>
                     <div className="flex items-center gap-1">
-                        <HeartIcon className="w-5 h-5" />
-                        <span>{post.likes}</span>
+                        <span>💬 {commentCount}</span>
                     </div>
                 </div>
             </div>

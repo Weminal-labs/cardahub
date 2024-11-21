@@ -64,3 +64,18 @@ export function useCreatePost(content: string, imageUrl: string) {
         isPending
     }
 }
+
+export function useGetPost(address: string, postId: number) {
+    const { data, error, isLoading } = useReadContract({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_POST as `0x${string}`,
+        abi: VentPostABI,
+        functionName: "getPost",
+        args: [address as `0x${string}`, BigInt(postId)],
+    });
+
+    return {
+        data,
+        error,
+        isLoading
+    }
+}   
