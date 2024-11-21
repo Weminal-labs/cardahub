@@ -24,7 +24,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ address, isOwnProfile }) => {
     const { data: userData, isLoading, error } = useGetUser(address) as { data: User | null, isLoading: boolean, error: Error | null };
     const { userState } = useContext(UserContext);
 
-    const { addr, isConnected } = userState;
+    const { addr } = userState;
     let { avatar, name, bio, jointTime, birthday } = userState;
 
     if (isLoading) {
@@ -39,16 +39,6 @@ const UserProfile: React.FC<UserProfileProps> = ({ address, isOwnProfile }) => {
         bio = userData.bio;
         birthday = userData.birthday;
         jointTime = userData.jointTime;
-    }
-
-    if (!isConnected) {
-        return (
-            <div className="flex flex-col items-center justify-center p-8">
-                <p className="text-light-text dark:text-dark-text">
-                    Please connect your wallet to view profile
-                </p>
-            </div>
-        );
     }
 
     if (!jointTime) {
