@@ -11,6 +11,10 @@ import {
   ledgerWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
 /* const config = getDefaultConfig({
   appName: 'Vent It',
