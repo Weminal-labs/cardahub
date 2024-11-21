@@ -5,11 +5,22 @@ import { ThemeToggle } from './shares/ThemeToggle';
 import WalletButton from './buttons/wallet.button';
 import Link from 'next/link';
 import { HomeIcon } from '@heroicons/react/24/outline';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === '/';
+  const [searchAddress, setSearchAddress] = useState('');
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchAddress.trim()) {
+      router.push(`/profile/${searchAddress.trim()}`);
+      setSearchAddress('');
+    }
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-light-primary/80 dark:bg-dark-primary/80 backdrop-blur-sm border-b border-light-secondary dark:border-dark-secondary shadow-sm p-4">
@@ -22,6 +33,16 @@ const Navbar: React.FC = () => {
         </Link>
 
         <div className="flex items-center gap-4">
+          <form onSubmit={handleSearch} className="hidden sm:block">
+            <input
+              type="text"
+              placeholder="Search wallet address..."
+              value={searchAddress}
+              onChange={(e) => setSearchAddress(e.target.value)}
+              className="px-4 py-2 rounded-lg bg-light-secondary dark:bg-dark-secondary text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </form>
+
           {!isHome && (
             <Link
               href="/"

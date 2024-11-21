@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useCreateUser, useUpdateUser } from '@/app/features/User';
 import toast from 'react-hot-toast';
+import DeleteUserButton from '../buttons/deleteUser.button';
 
 interface UserFormProps {
     onClose: () => void;
@@ -142,6 +143,12 @@ const UserForm: React.FC<UserFormProps> = ({ onClose, mode = 'create', initialDa
                         </button>
                     </div>
                 </form>
+                <div className="space-y-2">
+                    <p className="text-sm text-light-text/70 dark:text-dark-text/70 mt-4">
+                        Once you delete your profile, there is no going back. Please be certain.
+                    </p>
+                    <DeleteUserButton />
+                </div>
             </div>
         </div>
     );

@@ -12,6 +12,11 @@ export const VentPostABI = [
                 "type": "uint256"
             },
             {
+                "internalType": "uint256",
+                "name": "globalPostId",
+                "type": "uint256"
+            },
+            {
                 "internalType": "string",
                 "name": "_media",
                 "type": "string"
@@ -88,7 +93,7 @@ export const VentPostABI = [
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "postId",
+                "name": "globalPostId",
                 "type": "uint256"
             },
             {
@@ -157,6 +162,11 @@ export const VentPostABI = [
         ],
         "name": "getPost",
         "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
             {
                 "internalType": "address",
                 "name": "",
@@ -239,6 +249,11 @@ export const VentPostABI = [
         ],
         "name": "posts",
         "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
             {
                 "internalType": "address",
                 "name": "user",

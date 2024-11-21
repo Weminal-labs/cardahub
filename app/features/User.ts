@@ -2,6 +2,7 @@ import { useReadContract, useWriteContract } from 'wagmi';
 import { VentProfileABI } from '@/app/abis/VentProfile';
 import dotenv from 'dotenv';
 import { dateToTimeStamp } from '@/utils/dateParse';
+import { isAddress } from 'viem';
 dotenv.config();
 
 export function useCreateUser() {
@@ -83,18 +84,21 @@ export function useUpdateUser() {
     }
 }
 
-export function useGetUser(address: string) {
+export function useGetUser(address: string | undefined) {
     const { data, error, isLoading, isError } = useReadContract({
         address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_PROFILE as `0x${string}`,
         abi: VentProfileABI,
         functionName: "getUser",
-        args: [address],
+        args: [address as `0x${string}`],
+        query: {
+            enabled: Boolean(address && isAddress(address))
+        }
     });
 
     return {
         data,
         error,
         isLoading,
-        isError,
-    }
+        isError
+    };
 }

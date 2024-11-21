@@ -8,6 +8,7 @@ import { DocumentDuplicateIcon, UserIcon, ArrowRightOnRectangleIcon } from '@her
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { useAccount, useChainId, useBalance } from 'wagmi';
+import { formatUnits } from 'viem';
 import { UserContext } from '@/app/providers/UserProvider';
 import { useGetUser } from '@/app/features/User';
 import LoadingOverlay from '../shares/LoadingOverlay';
@@ -35,7 +36,7 @@ const WalletButton: React.FC = () => {
                     ...userData,
                     isConnected: true,
                     chainId: chainId,
-                    balance: balanceData?.formatted || null
+                    balance: balanceData ? formatUnits(balanceData.value, balanceData.decimals) : null
                 });
             } else if (justConnected && !isLoading && !userData) {
                 // Nếu vừa kết nối nhưng chưa có dữ liệu từ contract
@@ -43,7 +44,7 @@ const WalletButton: React.FC = () => {
                     addr: address || null,
                     isConnected: true,
                     chainId: chainId,
-                    balance: balanceData?.formatted || null,
+                    balance: balanceData ? formatUnits(balanceData.value, balanceData.decimals) : null,
                     name: null,
                     avatar: null,
                     bio: null,
@@ -54,7 +55,7 @@ const WalletButton: React.FC = () => {
                 });
             }
         }
-    }, [address, isConnected, userData, isLoading, userState.addr, userState.isConnected, clearUser, setUser, chainId, balanceData?.formatted]);
+    }, [address, isConnected, userData, isLoading, userState.addr, userState.isConnected, clearUser, setUser, chainId, balanceData]);
 
 
     return (
