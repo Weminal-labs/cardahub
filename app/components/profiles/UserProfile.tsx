@@ -12,6 +12,7 @@ import { timeStampToDate } from '@/utils/dateParse';
 import { useGetUser } from '@/app/features/User';
 import { User } from '@/app/types/user';
 import { Spinner } from '../shares/Spinner';
+import CreatePostButton from '../buttons/createPost.button';
 interface UserProfileProps {
     address?: string;    // Optional vì có thể xem profile của chính mình
     isOwnProfile?: boolean;  // Để biết có phải profile của user hiện tại không
@@ -165,6 +166,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ address, isOwnProfile }) => {
                         </p>
                         <DeleteUserButton />
                     </div>
+                    <CreatePostButton />
                 </div>
             )}
 
