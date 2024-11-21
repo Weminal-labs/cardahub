@@ -51,5 +51,53 @@ export function useGetPost(address: string, postId: number) {
         error,
         isLoading
     }
-}   
+}
 
+export function useAddComment() {
+    const { writeContract, data, error, isPending } = useWriteContract();
+    const addComment = async (postOwnerAddr: string, postId: number, globalPostId: number, media: string, content: string) => {
+        await writeContract({
+            address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_POST as `0x${string}`,
+            abi: VentPostABI,
+            functionName: "addComment",
+            args: [postOwnerAddr as `0x${string}`, BigInt(postId), BigInt(globalPostId), media, content],
+        });
+    };
+
+    return {
+        addComment,
+        data,
+        error,
+        isPending
+    }
+}
+
+export function useGetCommentCount(globalPostId: number) {
+    const { data, error, isLoading } = useReadContract({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_POST as `0x${string}`,
+        abi: VentPostABI,
+        functionName: "getCommentCount",
+        args: [BigInt(globalPostId)],
+    });
+
+    return {
+        data,
+        error,
+        isLoading
+    }
+}
+
+export function useGetComment(globalPostId: number, commentId: number) {
+    const { data, error, isLoading } = useReadContract({
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_POST as `0x${string}`,
+        abi: VentPostABI,
+        functionName: "getComment",
+        args: [BigInt(globalPostId), BigInt(commentId)],
+    });
+
+    return {
+        data,
+        error,
+        isLoading
+    }
+}
