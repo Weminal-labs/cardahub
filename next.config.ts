@@ -7,7 +7,8 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
-    domains: ['scontent.fsgn19-1.fna.fbcdn.net'],
+    domains: ['scontent.fsgn19-1.fna.fbcdn.net', 'scontent.fsgn5-12.fna.fbcdn.net'],
+
   },
 };
 
