@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vent - Social Media dApp
 
-## Getting Started
+A decentralized social media application built with Next.js, Wagmi, and RainbowKit.
 
-First, run the development server:
+## Prerequisites
 
+Before you begin, ensure you have installed:
+- Node.js (v18 or higher)
+- npm or yarn or pnpm
+- Git
+
+## Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_wallet_connect_project_id
+NEXT_PUBLIC_CONTRACT_ADDRESS_PROFILE=your_profile_contract_address
+NEXT_PUBLIC_CONTRACT_ADDRESS_POST=your_post_contract_address
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Menh1505/vent_it-client.git
+cd vent_it-client
+```
+
+2. Install dependencies:
+```bash
+npm install
+or
+yarn install
+or
+pnpm install
+or
+bun install
+```
+
+
+3. Run the development server:
 ```bash
 npm run dev
-# or
+or
 yarn dev
-# or
+or
 pnpm dev
-# or
+or
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🌙 Dark/Light mode support
+- 👤 Web3 Authentication with RainbowKit
+- 📝 Create and view posts
+- 💬 Comment system
+- 👥 User profiles
+- 🔍 Search users by wallet address
 
-## Learn More
+You can watch this demo video for more information: [Demo Video](https://youtu.be/pFuk3JyZDSo)
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework:** Next.js 15
+- **Styling:** Tailwind CSS
+- **Web3:**
+  - Wagmi
+  - RainbowKit
+  - Viem
+- **State Management:** React Context
+- **UI Components:**
+  - HeadlessUI
+  - Heroicons
+- **Development Tools:**
+  - TypeScript
+  - ESLint
+  - PostCSS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
+vent_it-client/
+├── app/
+│ ├── components/ # Reusable UI components
+│ ├── providers/ # Context providers
+│ ├── features/ # Feature-specific logic
+│ ├── types/ # TypeScript type definitions
+│ └── styles/ # Global styles
+├── public/ # Static assets
+└── utils/ # Utility functions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
