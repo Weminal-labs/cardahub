@@ -59,7 +59,7 @@ bun dev
 - 👥 User profiles
 - 🔍 Search users by wallet address
 
-You can watch this demo video for more information: https://youtu.be/pFuk3JyZDSo
+You can watch this demo video for more information: [Demo](https://www.youtube.com/watch?v=pFuk3JyZDSo)
 ## Tech Stack
 
 - **Framework:** Next.js 15
