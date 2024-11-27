@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from 'next-themes';
 import { http, WagmiProvider } from 'wagmi';
-import { mainnet, sepolia } from 'wagmi/chains';
+import { klaytn, klaytnBaobab } from 'wagmi/chains';
 import { getDefaultConfig, getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { UserProvider } from './UserProvider';
@@ -23,12 +23,16 @@ const config = getDefaultConfig({
     },
   ],
   chains: [
-    mainnet,
-    sepolia
+    // mainnet,
+    // sepolia,
+    klaytn,
+    klaytnBaobab,
   ],
   transports: {
-    [mainnet.id]: http('https://rpc.ankr.com/eth'),
-    [sepolia.id]: http('https://rpc.ankr.com/eth_sepolia'),
+    // [mainnet.id]: http('https://rpc.ankr.com/eth'),
+    // [sepolia.id]: http('https://rpc.ankr.com/eth_sepolia'),
+    [klaytn.id]: http('https://public-node-api.klaytnapi.com/v1/cypress'),
+    [klaytnBaobab.id]: http('https://public-node-api.klaytnapi.com/v1/baobab'),
   },
   ssr: true,
 });
