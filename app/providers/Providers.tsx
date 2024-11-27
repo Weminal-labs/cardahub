@@ -11,21 +11,10 @@ import {
   ledgerWallet,
 } from '@rainbow-me/rainbowkit/wallets';
 
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
-/* const config = getDefaultConfig({
-  appName: 'Vent It',
-  projectId: projectId || '',
-  chains: [mainnet, sepolia],
-  ssr: true,
-}); */
 const { wallets } = getDefaultWallets();
 const config = getDefaultConfig({
   appName: 'Vent',
-  projectId: 'ab4ba6e4b7b07a23c102eb73ac377d93' || '',
+  projectId: 'ab4ba6e4b7b07a23c102eb73ac377d93',
   wallets: [
     ...wallets,
     {
