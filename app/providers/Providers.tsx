@@ -31,7 +31,7 @@ const config = getDefaultConfig({
   transports: {
     // [mainnet.id]: http('https://rpc.ankr.com/eth'),
     // [sepolia.id]: http('https://rpc.ankr.com/eth_sepolia'),
-    [klaytn.id]: http('https://public-node-api.klaytnapi.com/v1/cypress'),
+    [klaytn.id]: http('https://kaia-kairos.blockpi.network/v1/rpc/public'),
     [klaytnBaobab.id]: http('https://public-node-api.klaytnapi.com/v1/baobab'),
   },
   ssr: true,
