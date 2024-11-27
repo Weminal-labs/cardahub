@@ -25,7 +25,7 @@ const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
 const { wallets } = getDefaultWallets();
 const config = getDefaultConfig({
   appName: 'Vent',
-  projectId: projectId || '',
+  projectId: 'ab4ba6e4b7b07a23c102eb73ac377d93' || '',
   wallets: [
     ...wallets,
     {
