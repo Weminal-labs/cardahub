@@ -7,8 +7,10 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: ['scontent.fsgn19-1.fna.fbcdn.net', 'scontent.fsgn5-12.fna.fbcdn.net'],
-
   },
 };
 

@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { HomeIcon } from '@heroicons/react/24/outline';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import icon from '@/public/icon.svg';
+import Image from 'next/image';
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
@@ -25,12 +27,21 @@ const Navbar: React.FC = () => {
   return (
     <nav className="sticky top-0 z-50 w-full bg-light-primary/80 dark:bg-dark-primary/80 backdrop-blur-sm border-b border-light-secondary dark:border-dark-secondary shadow-sm p-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link 
-          href="/" 
-          className="text-light-text dark:text-dark-text font-bold text-xl hover:opacity-80 transition-opacity"
-        >
-          Vent
-        </Link>
+        <div className="flex items-center gap-2">
+          <Image
+            src={icon}
+            alt="Cardahub Logo"
+            width={50}
+            height={50}
+            className="animate-fade-down"
+          />
+          <Link
+            href="/"
+            className="text-light-text dark:text-dark-text font-bold text-xl hover:opacity-80 transition-opacity"
+          >
+            Cardahub
+          </Link>
+        </div>
 
         <div className="flex items-center gap-4">
           <form onSubmit={handleSearch} className="hidden sm:block">
@@ -52,7 +63,7 @@ const Navbar: React.FC = () => {
               <span className="hidden sm:inline">Home</span>
             </Link>
           )}
-          
+
           <WalletButton />
           <ThemeToggle />
         </div>
