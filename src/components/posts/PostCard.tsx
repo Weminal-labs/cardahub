@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { timeStampToDate } from '@/utils/dateParse';
+import { timeStampToDate } from '@/src/utils/dateParse';
 import { useGetPost } from '@/app/features/Post';
 import { Spinner } from '../shares/Spinner';
 import { useState } from 'react';

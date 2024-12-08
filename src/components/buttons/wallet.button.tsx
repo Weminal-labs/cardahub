@@ -9,7 +9,7 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { useAccount, useChainId, useBalance } from 'wagmi';
 import { formatUnits } from 'viem';
-import { UserContext } from '@/app/providers/UserProvider';
+import { UserContext } from '@/src/providers/UserProvider';
 import { useGetUser } from '@/app/features/User';
 import LoadingOverlay from '../shares/LoadingOverlay';
 

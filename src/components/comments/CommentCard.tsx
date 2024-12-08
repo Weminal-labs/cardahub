@@ -1,7 +1,7 @@
 'use client';
 
 import { useGetComment } from "@/app/features/Post";
-import { timeStampToDate } from "@/utils/dateParse";
+import { timeStampToDate } from "@/src/utils/dateParse";
 
 interface CommentCardProps {
     globalId: number;

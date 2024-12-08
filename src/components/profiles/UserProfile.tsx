@@ -1,15 +1,15 @@
 'use client';
 
 import React, { useState, useContext } from 'react';
-import { UserContext } from '@/app/providers/UserProvider';
+import { UserContext } from '@/src/providers/UserProvider';
 import { DocumentDuplicateIcon, UserIcon, PencilIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { Lightbox } from '../shares/Lightbox';
 import UserForm from './UserForm';
-import { timeStampToDate } from '@/utils/dateParse';
+import { timeStampToDate } from '@/src/utils/dateParse';
 import { useGetUser } from '@/app/features/User';
-import { User } from '@/app/types/user';
+import { User } from '@/src/types/user';
 import { Spinner } from '../shares/Spinner';
 import CreatePostButton from '../buttons/createPost.button';
 interface UserProfileProps {

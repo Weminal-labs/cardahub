@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 import UserProfile from '@/app/components/profiles/UserProfile';
 import UserPosts from '@/app/components/posts/Posts';
-import { UserContext } from '@/app/providers/UserProvider';
+import { UserContext } from '@/src/providers/UserProvider';
 import { useContext } from 'react';
 
 export default function ProfilePage() {
