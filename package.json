@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
+    "@meshsdk/core": "^1.7.31",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cross-spawn": "^7.0.6",
     "dotenv": "^16.4.5",
     "ethers": "^6.13.4",
     "lucide-react": "^0.453.0",
@@ -22,6 +24,7 @@
     "react-hot-toast": "^2.4.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
+    "tar": "^7.4.3",
     "zustand": "^5.0.1"
   },
   "devDependencies": {
