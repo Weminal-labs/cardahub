@@ -1,7 +1,19 @@
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import { useEffect } from 'react'
+import { Blockfrost, Lucid } from 'lucid-cardano'
 
 function App() {
+  useEffect(() => {
+    async function initLucid() {
+      const lucid = await Lucid.new(
+        new Blockfrost('https://cardano-preview.blockfrost.io/api/v0/metadata/txs/labels', 'previewrODzYCwJBCR6dBtGFGdfPbBYAkN0XgLT'),
+        'Preview'
+      )
+      console.log(lucid)
+    }
+    initLucid()
+  }, [])
   return (
     <>
       <Navbar />
