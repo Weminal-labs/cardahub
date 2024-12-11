@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import { useLucid } from './context/LucidProvider'
 import { useEffect } from 'react'
+import TransferAda from './components/cardano/TransferAda'
 
 function App() {
   const { lucid, address, getUTxOs } = useLucid()
@@ -19,21 +20,10 @@ function App() {
     <>
       <Navbar />
       <p>{address}</p>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* Thêm các routes khác ở đây */}
-      </Routes>
+      <TransferAda />
     </>
   )
 }
 
-// Tạm thời tạo component Home đơn giản
-const Home = () => {
-  return (
-    <div className="container mx-auto p-4">
-      <h1>Vite + React</h1>
-    </div>
-  )
-}
 
 export default App
