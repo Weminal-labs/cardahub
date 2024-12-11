@@ -1,22 +1,24 @@
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import { useLucid } from './context/LucidProvider'
 import { useEffect } from 'react'
-import { Blockfrost, Lucid } from 'lucid-cardano'
 
 function App() {
+  const { lucid, address, getUTxOs } = useLucid()
+  console.log(lucid)
+
   useEffect(() => {
-    async function initLucid() {
-      const lucid = await Lucid.new(
-        new Blockfrost('https://cardano-preview.blockfrost.io/api/v0/metadata/txs/labels', 'previewrODzYCwJBCR6dBtGFGdfPbBYAkN0XgLT'),
-        'Preview'
-      )
-      console.log(lucid)
+    async function tmp() {
+      const utxos = await getUTxOs()
+      console.log("utxos", utxos)
     }
-    initLucid()
-  }, [])
+    tmp()
+  }, [address, getUTxOs])
+
   return (
     <>
       <Navbar />
+      <p>{address}</p>
       <Routes>
         <Route path="/" element={<Home />} />
         {/* Thêm các routes khác ở đây */}

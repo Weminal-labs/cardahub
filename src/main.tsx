@@ -5,14 +5,17 @@ import { ThemeProvider } from 'next-themes'
 import { Toast } from './components/shares/Toast'
 import './index.css'
 import App from './App.tsx'
+import { LucidProvider } from './context/LucidProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider attribute="class">
-      <BrowserRouter>
-        <App />
-        <Toast />
-      </BrowserRouter>
-    </ThemeProvider>
+    <LucidProvider>
+      <ThemeProvider attribute="class">
+        <BrowserRouter>
+          <App />
+          <Toast />
+        </BrowserRouter>
+      </ThemeProvider>
+    </LucidProvider>
   </StrictMode>,
 )
