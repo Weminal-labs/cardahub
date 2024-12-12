@@ -2,6 +2,7 @@ import Navbar from './components/Navbar'
 import { useLucid } from './context/LucidProvider'
 import { useEffect } from 'react'
 import TransferAda from './components/cardano/TransferAda'
+import { Mint } from './components/cardano/Mint'
 
 function App() {
   const { lucid, address, getUTxOs } = useLucid()
@@ -20,6 +21,7 @@ function App() {
       <Navbar />
       <p>{address}</p>
       <TransferAda />
+      <Mint />
     </>
   )
 }
