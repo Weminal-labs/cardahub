@@ -12,7 +12,7 @@
   },
   "validators": [
     {
-      "title": "market.marketplace",
+      "title": "market.market",
       "datum": {
         "title": "datum",
         "schema": {

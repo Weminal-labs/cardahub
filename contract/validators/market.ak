@@ -13,7 +13,7 @@ type Datum{
 }
 
 validator {
-  fn marketplace(datum: Datum, _redeemer: Void, ctx: ScriptContext){
+  fn market(datum: Datum, _redeemer: Void, ctx: ScriptContext){
     let ScriptContext {transaction, purpose} = ctx
     let Transaction {outputs, ..} = transaction
     let signed_by_seller = must_be_signed_by(transaction, datum.seller)
