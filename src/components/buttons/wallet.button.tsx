@@ -27,7 +27,10 @@ const WalletButton = () => {
         <div className="relative">
             {!isConnected ? (
                 <button 
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-sm hover:shadow-md" 
+                    className="px-4 py-2 bg-cyber-gradient from-cyber-accent-cyan/80 to-cyber-accent-indigo/80 
+                             hover:from-cyber-accent-cyan-light hover:to-cyber-accent-indigo-light
+                             text-cyber-text-primary rounded-lg border border-cyber-border
+                             transition-all duration-200 font-medium shadow-md"
                     onClick={connectWallet}
                 >
                     Connect Wallet
@@ -35,7 +38,10 @@ const WalletButton = () => {
             ) : (
                 <>
                     <button 
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-sm hover:shadow-md flex items-center space-x-2"
+                        className="px-4 py-2 bg-cyber-gradient from-cyber-accent-cyan/80 to-cyber-accent-indigo/80 
+                                 hover:from-cyber-accent-cyan-light hover:to-cyber-accent-indigo-light
+                                 text-cyber-text-primary rounded-lg border border-cyber-border
+                                 transition-all duration-200 font-medium shadow-md flex items-center space-x-2"
                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     >
                         <span>Connected</span>
@@ -50,7 +56,8 @@ const WalletButton = () => {
                     </button>
 
                     {isDropdownOpen && (
-                        <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-1 z-10">
+                        <div className="absolute right-0 mt-2 w-48 bg-cyber-bg-secondary/95 backdrop-blur-sm 
+                                      rounded-lg shadow-lg py-1 z-10 border border-cyber-border">
                             <button 
                                 onClick={async () => {
                                     const addr = await lucid?.wallet.address()
@@ -62,11 +69,15 @@ const WalletButton = () => {
                                         });
                                     }
                                 }}
-                                className="w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-between"
+                                className="w-full px-4 py-2 text-sm text-cyber-text-secondary 
+                                         border-b border-cyber-border
+                                         hover:bg-cyber-bg-tertiary/50
+                                         transition-colors duration-200
+                                         flex items-center justify-between"
                             >
                                 <span>{walletAddress}</span>
                                 <svg 
-                                    className="w-4 h-4 ml-2" 
+                                    className="w-4 h-4 ml-2 text-cyber-text-muted" 
                                     fill="none" 
                                     stroke="currentColor" 
                                     viewBox="0 0 24 24"
@@ -81,7 +92,8 @@ const WalletButton = () => {
                             </button>
                             <button 
                                 onClick={() => window.location.href = '/profile'}
-                                className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                className="w-full text-left px-4 py-2 text-sm text-cyber-text-secondary
+                                         hover:bg-cyber-bg-tertiary/50 transition-colors duration-200"
                             >
                                 Profile
                             </button>
