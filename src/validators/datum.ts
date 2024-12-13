@@ -1,7 +1,6 @@
 import { Data } from "lucid-cardano"
 
 const marketDatumSchema = Data.Object({
-    owner: Data.Bytes(),
     policyId: Data.Bytes(),
     assetName: Data.Bytes(),
     seller: Data.Bytes(),

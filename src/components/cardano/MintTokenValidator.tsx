@@ -82,32 +82,30 @@ export const MintTokenValidator = () => {
     };
 
     return (
-        <div className="mt-8 border-t border-cyber-border pt-8 mx-auto w-4/5">
-            <h2 className="text-3xl font-extrabold mb-6 text-cyber-text-primary bg-gradient-to-r from-cyber-accent-cyan-light to-cyber-accent-indigo-light inline-block text-transparent bg-clip-text">
-                Mint Tokens
-            </h2>
-            <div className="flex flex-col gap-4 p-8 bg-cyber-gradient from-cyber-bg-primary/90 to-cyber-bg-secondary/90 backdrop-blur-md border border-cyber-border rounded-xl shadow-2xl">
+        <div className="mt-8 border-t border-white/30 pt-8">
+            <h2 className="text-3xl font-extrabold mb-6 text-white bg-gradient-to-r from-purple-400 to-blue-400 inline-block text-transparent bg-clip-text">Mint Tokens</h2>
+            <div className="flex flex-col gap-4 p-8 bg-gradient-to-br from-purple-500/30 to-blue-500/30 backdrop-blur-md border border-white/30 rounded-xl shadow-2xl">
                 <div className="flex flex-col gap-4">
-                    <div className="flex gap-4 items-center text-cyber-text-secondary">
-                        <label className="flex items-center cursor-pointer hover:text-cyber-accent-cyan-light transition-colors">
+                    <div className="flex gap-4 items-center text-white/90">
+                        <label className="flex items-center cursor-pointer hover:text-white transition-colors">
                             <input
                                 type="radio"
                                 name="tokenType"
                                 value="nft"
                                 checked={!isFungible}
                                 onChange={handleTypeChange}
-                                className="mr-2 accent-cyber-accent-cyan"
+                                className="mr-2 accent-purple-400"
                             />
                             NFT
                         </label>
-                        <label className="flex items-center cursor-pointer hover:text-cyber-accent-cyan-light transition-colors">
+                        <label className="flex items-center cursor-pointer hover:text-white transition-colors">
                             <input
                                 type="radio"
                                 name="tokenType"
                                 value="ft"
                                 checked={isFungible}
                                 onChange={handleTypeChange}
-                                className="mr-2 accent-cyber-accent-cyan"
+                                className="mr-2 accent-purple-400"
                             />
                             Fungible Token
                         </label>
@@ -119,25 +117,13 @@ export const MintTokenValidator = () => {
                             value={quantity}
                             onChange={(e) => setQuantity(parseInt(e.target.value))}
                             placeholder="Quantity"
-                            className="bg-cyber-bg-secondary/50 hover:bg-cyber-bg-tertiary/50 
-                                     border border-cyber-border 
-                                     rounded-lg p-3 
-                                     text-cyber-text-secondary 
-                                     placeholder-cyber-text-muted 
-                                     focus:outline-none focus:ring-2 focus:ring-cyber-accent-cyan/50 
-                                     transition-all"
+                            className="bg-white/10 hover:bg-white/15 border border-white/30 rounded-lg p-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400/50 transition-all"
                         />
                     )}
                     <input
                         type="text"
                         placeholder="NFT Name"
-                        className="bg-cyber-bg-secondary/50 hover:bg-cyber-bg-tertiary/50 
-                                 border border-cyber-border 
-                                 rounded-lg p-3 
-                                 text-cyber-text-secondary 
-                                 placeholder-cyber-text-muted 
-                                 focus:outline-none focus:ring-2 focus:ring-cyber-accent-cyan/50 
-                                 transition-all"
+                        className="bg-white/10 hover:bg-white/15 border border-white/30 rounded-lg p-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400/50 transition-all"
                         onChange={(e) => setName(e.target.value)}
                     />
                     <input
@@ -148,18 +134,13 @@ export const MintTokenValidator = () => {
                     />
                     <input
                         type="text"
-                        placeholder="Image URL"
+                        placeholder="CID"
                         className="bg-white/10 hover:bg-white/15 border border-white/30 rounded-lg p-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400/50 transition-all"
                         onChange={(e) => setImage(e.target.value)}
                     />
                     <div className="flex gap-4">
                         <button
-                            className="bg-cyber-gradient 
-                                     from-cyber-accent-cyan/90 to-cyber-accent-indigo/90 
-                                     hover:from-cyber-accent-cyan-light hover:to-cyber-accent-indigo-light 
-                                     text-cyber-text-primary font-bold py-3 px-8 
-                                     rounded-lg border border-cyber-border 
-                                     transition-all duration-200 shadow-lg"
+                            className="bg-gradient-to-r from-purple-500/80 to-blue-500/80 hover:from-purple-500/90 hover:to-blue-500/90 text-white font-bold py-3 px-8 rounded-lg border border-white/30 transition-all duration-200 shadow-lg"
                             onClick={mintAssetService}
                             disabled={loading}
                         >

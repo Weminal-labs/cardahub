@@ -2,6 +2,7 @@ import Navbar from './components/Navbar'
 import TransferAda from './components/cardano/TransferAda'
 import { MintTokenValidator } from './components/cardano/MintTokenValidator'
 import { MyNFTs } from './components/cardano/MyNFTs'
+import { SellNFT } from './components/cardano/SellNFT'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <TransferAda />
         <MintTokenValidator />
         <MyNFTs />
+        <SellNFT />
       </div>
     </div>
   )

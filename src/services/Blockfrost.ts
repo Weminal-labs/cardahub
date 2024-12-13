@@ -45,7 +45,7 @@ class BlockforstService {
         }
     }
 
-    /* async getNFTs(address: string) {
+    async getNFTs(address: string) {
         if (!address) throw new Error('Address is required');
 
         const utxos = await this.getAddressUtxos(address);
@@ -63,7 +63,7 @@ class BlockforstService {
         }));
 
         return nfts;
-    } */
+    }
 }
 
 export default BlockforstService;
