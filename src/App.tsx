@@ -1,27 +1,15 @@
 import Navbar from './components/Navbar'
-import { useLucid } from './context/LucidProvider'
-import { useEffect } from 'react'
 import TransferAda from './components/cardano/TransferAda'
 import { Mint } from './components/cardano/Mint'
+import { MyNFTs } from './components/cardano/MyNFTs'
 
 function App() {
-  const { lucid, address, getUTxOs } = useLucid()
-  console.log(lucid)
-
-  useEffect(() => {
-    async function tmp() {
-      const utxos = await getUTxOs()
-      console.log("utxos", utxos)
-    }
-    tmp()
-  }, [address, getUTxOs])
-
   return (
     <>
       <Navbar />
-      <p>{address}</p>
       <TransferAda />
       <Mint />
+      <MyNFTs />
     </>
   )
 }
