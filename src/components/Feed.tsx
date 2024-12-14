@@ -21,7 +21,8 @@ const Feed = () => {
   };
 
   return (
-    <div className="feed">
+    <div className="bg-cyber-bg-secondary/30 p-6 rounded-lg border border-cyber-border">
+      <h1 className="text-2xl font-bold text-cyber-accent-cyan mb-4">Feed</h1>
       {tweets.map(tweet => (
         <div key={tweet.id} className="tweet-card">
           <div className="tweet-header">

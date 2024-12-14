@@ -1,26 +1,37 @@
 // Sidebar.tsx
+import { Link, useLocation } from 'react-router-dom';
+
 const Sidebar = () => {
+  const location = useLocation();
+
   return (
-    <aside className="fixed left-0 h-screen w-64 bg-gray-800 text-white p-4">
-      <nav>
-        <ul className="space-y-4">
+    <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 
+                      bg-cyber-gradient from-cyber-bg-primary/90 to-cyber-bg-secondary/90 
+                      border-r border-cyber-border 
+                      backdrop-blur-sm">
+      <nav className="p-4">
+        <ul className="space-y-2">
           <li>
-            <a
-              href="/feed"
-              className="flex items-center p-2 hover:bg-gray-700 rounded-lg"
+            <Link
+              to="/feed"
+              className={`flex items-center p-3 rounded-lg transition-all duration-200
+                         ${location.pathname === '/feed'
+                  ? 'bg-cyber-accent-cyan/20 text-cyber-accent-cyan'
+                  : 'hover:bg-cyber-bg-secondary/50'}`}
             >
-              <span className="material-icons mr-2">rss_feed</span>
               Feed
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/nft-market"
-              className="flex items-center p-2 hover:bg-gray-700 rounded-lg"
+            <Link
+              to="/nft-market"
+              className={`flex items-center p-3 rounded-lg transition-all duration-200
+                         ${location.pathname === '/nft-market'
+                  ? 'bg-cyber-accent-cyan/20 text-cyber-accent-cyan'
+                  : 'hover:bg-cyber-bg-secondary/50'}`}
             >
-              <span className="material-icons mr-2">store</span>
               NFT Market
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

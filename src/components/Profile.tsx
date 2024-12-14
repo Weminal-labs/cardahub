@@ -24,7 +24,7 @@ const updatedProfile = {
 const UserProfileComponent = () => {
     const { lucid } = useLucid();
 
-    const CreateProfile = () => {
+    /* const CreateProfile = () => {
         try {
             if (!lucid) {
                 throw new Error("Lucid is not initialized");
@@ -50,13 +50,17 @@ const UserProfileComponent = () => {
 
         } catch (error) {
             return error;
-        }
-    }
+        } 
+    }*/
+
 
     return (
-        <button>
-            Create Profile
-        </button>
+        <div className="bg-cyber-bg-secondary/30 p-6 rounded-lg border border-cyber-border">
+            <h1 className="text-2xl font-bold text-cyber-accent-cyan mb-4">Profile</h1>
+            <button>
+                Create Profile
+            </button>
+        </div>
     )
 }
 
