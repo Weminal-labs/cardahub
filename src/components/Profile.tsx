@@ -39,7 +39,7 @@ const UserProfileComponent = () => {
                     type: "PlutusV2",
                     script: validator.script,
                     datum = null,
-                    redeemer
+                    redeemer = {Create : oldProfile}
                 })
                 .complete();
 
