@@ -1,9 +1,9 @@
 import Navbar from './components/Navbar'
-import TransferAda from './components/cardano/TransferAda'
-import { MintTokenValidator } from './components/cardano/MintTokenValidator'
-import { MyNFTs } from './components/cardano/MyNFTs'
-import { SellNFT } from './components/cardano/SellNFT'
-import { NFTMarket } from './components/cardano/NFTMarket'
+import TransferAda from './components/NFTMarket/TransferAda'
+import { MintTokenValidator } from './components/NFTMarket/MintTokenValidator'
+import { MyNFTs } from './components/NFTMarket/MyNFTs'
+import { SellNFT } from './components/NFTMarket/SellNFT'
+import { NFTMarket } from './components/NFTMarket/NFTMarket'
 
 function App() {
   return (
