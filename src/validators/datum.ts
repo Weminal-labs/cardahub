@@ -7,6 +7,18 @@ const marketDatumSchema = Data.Object({
     price: Data.Integer()
 })
 
+const profileDatumSchema = Data.Object({
+    owner: Data.Bytes(),
+    name: Data.Bytes(),
+    avatar: Data.Bytes(),
+    bio: Data.Bytes(),
+    birthday: Data.Bytes(),
+    jointTime: Data.Bytes(),
+    address: Data.Bytes()
+})
+
+type profileDatum = Data.Static<typeof profileDatumSchema>;
 type NFTMarketDatum = Data.Static<typeof marketDatumSchema>;
 
 export const NFTMarketDatum = marketDatumSchema as unknown as NFTMarketDatum
+export const profileDatum = profileDatumSchema as unknown as profileDatum
