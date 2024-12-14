@@ -1,5 +1,6 @@
 import getValidator from '../validators/profileValidator'
 import { useLucid } from '../context/LucidProvider';
+import { MyNFTs } from './NFTMarket/MyNFTs';
 
 const oldProfile = {
     owner: "your_verification_key_hash",
@@ -60,6 +61,8 @@ const UserProfileComponent = () => {
             <button>
                 Create Profile
             </button>
+
+            <MyNFTs />
         </div>
     )
 }
