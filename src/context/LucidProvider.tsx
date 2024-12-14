@@ -20,7 +20,7 @@ export const LucidProvider = ({ children }: { children: React.ReactNode }) => {
     const initLucid = async () => {
       try {
         const lucidInstance = await Lucid.new(
-          new Blockfrost("https://cardano-preprod.blockfrost.io/api/v0", "preprodaDCuJ1u8d8yNWBBjWcc5NCGJLr9mNZeJ"),
+          new Blockfrost("https://cardano-preprod.blockfrost.io/api/v0/", "preprodJ6gpAmrohmOfLGDK9ac9y3Nqy0ZxUhQW"),
           "Preprod",
         );
         setLucid(lucidInstance);

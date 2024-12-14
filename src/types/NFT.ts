@@ -1,3 +1,5 @@
+import { Assets, Script, UTxO } from "lucid-cardano";
+
 export interface NFT {
     unit: string;
     quantity: string;
@@ -21,18 +23,16 @@ export interface NFT {
     }
 }
 
-export interface NFTListing {
+export interface NFTListing extends UTxO {
     address: string;
     assetName: string;
-    assets: {
-        [policyId: string]: string;
-    };
+    assets: Assets;
     datum: string;
     datumHash?: string;
     outputIndex: number;
     policyId: string;
     price: bigint;
-    scriptRef?: string;
+    scriptRef?: Script | null; // Sửa kiểu của scriptRef
     seller: string;
     txHash: string;
 }

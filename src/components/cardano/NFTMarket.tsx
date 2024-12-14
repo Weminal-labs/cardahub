@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLucid } from "../../context/LucidProvider";
 import NFTMarketplace from "../../services/NFT-Market";
-import { Data, UTxO } from "lucid-cardano";
+import { Data } from "lucid-cardano";
 import { NFTMarketDatum } from "../../validators/datum";
 import { NFTListing } from "../../types/NFT";
 import getValidator from "../../validators";
@@ -20,7 +20,7 @@ export const NFTMarket = () => {
 
       const utxos = scriptUTxOs?.map((utxo) => {
         try {
-          const temp = Data.from<NFTMarketDatum>(utxo.datum ?? '', NFTMarketDatum);
+          const temp = Data.from<typeof NFTMarketDatum>(utxo.datum ?? '', NFTMarketDatum);
           return {
             ...utxo,
             ...temp
@@ -47,10 +47,6 @@ export const NFTMarket = () => {
         throw new Error("Contract address not found");
       }
 
-      // const feeMarket 
-      const policyId = nft.policyId;
-      const assetName = nft.assetName;
-
       const marketAddress = "addr_test1qqmxk3urj26t0ck0zh7npkm299ahcjz8v59g8kv7838k8a9rzppma9t4zghcxypcj4zlqlklesura4sm0ucgw3hjxwlqs5jf3h";
 
       const feeMarket = (BigInt(nft.price) * 1n * 10n ** 6n) / 100n; // 1% fee of the price
@@ -59,13 +55,10 @@ export const NFTMarket = () => {
       if (!sellerAddressCredential) {
         throw new Error("Seller address credential not found");
       }
-      console.log("sellerAddressCredential", sellerAddressCredential);
-
       const sellerAddress = lucid?.utils.credentialToAddress(sellerAddressCredential);
       if (!sellerAddress) {
         throw new Error("Seller address not found");
       }
-      console.log("sellerAddress", sellerAddress);
 
       const tx = await lucid?.newTx()
         .payToAddress(sellerAddress, { lovelace: BigInt(nft?.price) * 10n ** 6n })
