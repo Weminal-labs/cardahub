@@ -20,3 +20,19 @@ export interface NFT {
         metadata: null | unknown;
     }
 }
+
+export interface NFTListing {
+    address: string;
+    assetName: string;
+    assets: {
+        [policyId: string]: string;
+    };
+    datum: string;
+    datumHash?: string;
+    outputIndex: number;
+    policyId: string;
+    price: bigint;
+    scriptRef?: string;
+    seller: string;
+    txHash: string;
+}

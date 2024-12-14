@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import NFTCard from './NFTCard'
 import BlockfrostService from '../../services/Blockfrost';
 import { useLucid } from '../../context/LucidProvider';
-import { marketDatum } from '../../validators/datum';
+import { NFTMarketDatum } from '../../validators/datum';
 import { Data } from 'lucid-cardano';
 import getMarketplaceValidator from '../../validators';
 import { NFT } from "../../types/NFT"
@@ -53,7 +53,7 @@ export const SellNFT = () => {
                     seller: sellerPubKeyHash,
                     price: BigInt(price)
                 },
-                marketDatum
+                NFTMarketDatum
             )
 
             const nft = policyId + assetName;
