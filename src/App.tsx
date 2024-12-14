@@ -1,30 +1,24 @@
 import Navbar from './components/Navbar'
-import { useLucid } from './context/LucidProvider'
-import { useEffect } from 'react'
 import TransferAda from './components/cardano/TransferAda'
-import { Mint } from './components/cardano/Mint'
+import { MintTokenValidator } from './components/cardano/MintTokenValidator'
+import { MyNFTs } from './components/cardano/MyNFTs'
+import { SellNFT } from './components/cardano/SellNFT'
+import { NFTMarket } from './components/cardano/NFTMarket'
 
 function App() {
-  const { lucid, address, getUTxOs } = useLucid()
-  console.log(lucid)
-
-  useEffect(() => {
-    async function tmp() {
-      const utxos = await getUTxOs()
-      console.log("utxos", utxos)
-    }
-    tmp()
-  }, [address, getUTxOs])
-
   return (
-    <>
+    <div className="min-h-screen w-full overflow-x-hidden bg-cyber-bg-primary">
+      <div className="fixed inset-0 bg-cyber-gradient from-cyber-bg-primary to-cyber-bg-secondary -z-10" />
       <Navbar />
-      <p>{address}</p>
-      <TransferAda />
-      <Mint />
-    </>
+      <div className="mx-auto w-4/5">
+        <TransferAda />
+        <MintTokenValidator />
+        <MyNFTs />
+        <SellNFT />
+        <NFTMarket />
+      </div>
+    </div>
   )
 }
-
 
 export default App

@@ -1,13 +1,12 @@
 import { Data } from "lucid-cardano"
 
 const marketDatumSchema = Data.Object({
-    owner: Data.Bytes(),
     policyId: Data.Bytes(),
     assetName: Data.Bytes(),
     seller: Data.Bytes(),
     price: Data.Integer()
 })
 
-type marketDatum = Data.Static<typeof marketDatumSchema>;
+type NFTMarketDatum = Data.Static<typeof marketDatumSchema>;
 
-export const marketDatum = marketDatumSchema as unknown as marketDatum
+export const NFTMarketDatum = marketDatumSchema as unknown as NFTMarketDatum
