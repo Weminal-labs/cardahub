@@ -1,8 +1,8 @@
 import { SpendingValidator } from "lucid-cardano";
-import market from "./plutus.json"
+import profile from "./plutus.json"
 
 const readValidator = (): SpendingValidator => {
-    const profileValidator = market.validators.find((validator) => validator.title === "profile.user_profile");
+    const profileValidator = profile.validators.find((validator) => validator.title === "profile.user_profile");
     if (!profileValidator) {
         throw new Error("Profile validator not found");
     }

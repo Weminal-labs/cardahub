@@ -1,41 +1,56 @@
-import { Lucid } from 'lucid-cardano';
+import getValidator from '../validators/profileValidator'
 import { useLucid } from '../context/LucidProvider';
 
-type UserProfile = {
-    owner: string, // VerificationKeyHash
-    name: string,
-    avatar: string,
-    bio: string,
-    birthday: string,
-    jointTime: string,
-    address: string
-}
+const oldProfile = {
+    owner: "your_verification_key_hash",
+    name: "John Doe",
+    avatar: "https://example.com/avatar.jpg",
+    bio: "Lorem ipsum",
+    birthday: "1990-01-01",
+    jointTime: "2024-12-01",
+    address: "your_cardano_address"
+};
 
+const updatedProfile = {
+    owner: "your_verification_key_hash",
+    name: "John Doe Updated",
+    avatar: "https://example.com/new-avatar.jpg",
+    bio: "Updated bio",
+    birthday: "1990-01-01",
+    jointTime: "2024-12-01",
+    address: "your_cardano_address"
+};
 
 const UserProfileComponent = () => {
     const { lucid } = useLucid();
 
     const CreateProfile = () => {
-        if (!lucid) return;
+        try {
+            if (!lucid) {
+                throw new Error("Lucid is not initialized");
+            }
 
-        const newProfile = {
-            owner: "your_verification_key_hash", // VerificationKeyHash của người dùng
-            name: "John Doe",
-            avatar: "https://example.com/avatar.jpg",
-            bio: "Lorem ipsum",
-            birthday: "1990-01-01",
-            jointTime: "2024-12-01",
-            address: "your_cardano_address"
-        };
+            const validator = getValidator();
 
-        const tx = await lucid?.newTx()
-            .attachSpendingValidator({
-                type: "PlutusV2",
-                script: script,
-                datum: null,  // Datum là null khi tạo mới
-                redeemer: { Create: newProfile }  // Gắn action là Create với dữ liệu hồ sơ người dùng
-            })
-            .complete();
+            // Tạo giao dịch với hành động
+            const tx = await lucid
+                .newTx()
+                .attachSpendingValidator({
+                    type: "PlutusV2",
+                    script: validator.script,
+                    datum = null,
+                    redeemer
+                })
+                .complete();
+
+            // Ký và gửi giao dịch
+            const signedTx = await tx.sign().complete();
+            const txHash = await signedTx.submit();
+            console.log("Transaction Hash:", txHash);
+
+        } catch (error) {
+            return error;
+        }
     }
 
     return (
