@@ -5,7 +5,6 @@ interface NFTCardProps {
 }
 
 const NFTCard = ({ nft }: NFTCardProps) => {
-    console.log(nft)
     return (
         <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
             <div className="relative">

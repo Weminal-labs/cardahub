@@ -15,7 +15,7 @@ export const MyNFTs = () => {
             if (!address || !lucid) return;
             const result = await blockfrost.getNFTs(address);
             setNfts(result);
-            console.log(nfts);
+            // console.log(nfts);
         }
         fetchNFTs();
     }, [address, nfts, lucid])
