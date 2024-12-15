@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import Feed from './components/Feed';
+import Feed from './components/Feed/Feed';
 import { NFTMarket } from './components/NFTMarket/NFTMarket';
 import Navbar from './components/Navbar';
-import UserProfileComponent from './components/Profile';
+import UserProfileComponent from './components/profile/Profile';
 
 function App() {
   return (

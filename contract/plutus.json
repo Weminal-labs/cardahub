@@ -33,17 +33,17 @@
       "datum": {
         "title": "datum",
         "schema": {
-          "$ref": "#/definitions/Option$profile~1UserProfile"
+          "$ref": "#/definitions/profile~1UserProfile"
         }
       },
       "redeemer": {
-        "title": "action",
+        "title": "_redeemer",
         "schema": {
-          "$ref": "#/definitions/profile~1Action"
+          "$ref": "#/definitions/Void"
         }
       },
-      "compiledCode": "5902fd010000323232323232232323232322322533300a3232533300c3009300d37546020602200426464a66601c6016601e6ea803454ccc038c030c03cdd50038998008019bae300230103754602460206ea801c5280992999807980618081baa008132533301033003005375c600860246ea80044cdc79bae3004301237540046eb8c010c048dd50008a503013301137540102940c048c040dd50069119198008009bac3014301530153015301530153015301530153012375400644a66602800229404c94ccc048cdc79bae301600200414a2266006006002602c002460220022940c03c004c030dd50008a4c26cac64a666012600e00226464a66601c60200042649318030008b180700098059baa00215333009300600113232533300e3010002132498c01800458c038004c02cdd50010b18049baa001325333007300500113232533300c300e002132498c01000458c030004c024dd50030a99980398020008a99980518049baa00614985858c01cdd500292999803180218039baa00113232323232323232323232323232533301730190021324994ccc050c048c054dd5000899191919299980d980e8010991924c64a666034603000226464a66603e60420042649319299980e980d800899192999811181200109924c60360022c6044002603e6ea800854ccc074c0680044c8c8c8c8c8c94ccc098c0a000852616375a604c002604c0046eb4c090004c090008dd69811000980f9baa00216301d37540022c603e00260386ea800c54ccc068c05c00454ccc074c070dd50018a4c2c2c60346ea8008c05000c58c06c004c06c008c064004c058dd50008b0b180b800980b8011b99375c602a002602a0046e64dd7180980098098011b99375c602200260220046e64dd7180780098078011b99375c601a002601a0046eb8c02c004c020dd50008b1192999803180200089919299980598068010a4c2c6eb8c02c004c020dd50010a999803180180089919299980598068010a4c2c6eb8c02c004c020dd50010b18031baa001370e90011b87480015cd2ab9d5573caae7d5d0aba21",
-      "hash": "48abb5a047d6abcd246e998662da5f0e6615cee43faf8d6772410796"
+      "compiledCode": "58fb01000032323232323223223225333006323253330083370e900118049baa300c300d0021533300800114a22940528199119198008009bac300e300f300f300f300f300f300f300f300f300c375400644a66601c00229404c94ccc030cdc79bae301000200414a2266006006002602000260160026eb8c02cc024dd500318041baa00114984d958c94ccc014cdc3a4000600c0022a666010600e0022930b0b1baa00153330023370e900018019baa00113232323232323232533300d300f002149858dcc9bae300d001300d00237326eb8c02c004c02c008dcc9bae30090013009002375c600e00260086ea8004595cd2ab9d5573caae7d5d0aba21",
+      "hash": "e5e8e0b46a580ac75349fdb8bf50c20c911b8a02e4c998b698faf50d"
     }
   ],
   "definitions": {
@@ -52,52 +52,6 @@
     },
     "Int": {
       "dataType": "integer"
-    },
-    "Option$aiken/transaction/credential/Referenced$aiken/transaction/credential/Credential": {
-      "title": "Optional",
-      "anyOf": [
-        {
-          "title": "Some",
-          "description": "An optional value.",
-          "dataType": "constructor",
-          "index": 0,
-          "fields": [
-            {
-              "$ref": "#/definitions/aiken~1transaction~1credential~1Referenced$aiken~1transaction~1credential~1Credential"
-            }
-          ]
-        },
-        {
-          "title": "None",
-          "description": "Nothing.",
-          "dataType": "constructor",
-          "index": 1,
-          "fields": []
-        }
-      ]
-    },
-    "Option$profile/UserProfile": {
-      "title": "Optional",
-      "anyOf": [
-        {
-          "title": "Some",
-          "description": "An optional value.",
-          "dataType": "constructor",
-          "index": 0,
-          "fields": [
-            {
-              "$ref": "#/definitions/profile~1UserProfile"
-            }
-          ]
-        },
-        {
-          "title": "None",
-          "description": "Nothing.",
-          "dataType": "constructor",
-          "index": 1,
-          "fields": []
-        }
-      ]
     },
     "String": {
       "dataType": "#string"
@@ -110,88 +64,6 @@
           "dataType": "constructor",
           "index": 0,
           "fields": []
-        }
-      ]
-    },
-    "aiken/transaction/credential/Address": {
-      "title": "Address",
-      "description": "A Cardano `Address` typically holding one or two credential references.\n\n Note that legacy bootstrap addresses (a.k.a. 'Byron addresses') are\n completely excluded from Plutus contexts. Thus, from an on-chain\n perspective only exists addresses of type 00, 01, ..., 07 as detailed\n in [CIP-0019 :: Shelley Addresses](https://github.com/cardano-foundation/CIPs/tree/master/CIP-0019/#shelley-addresses).",
-      "anyOf": [
-        {
-          "title": "Address",
-          "dataType": "constructor",
-          "index": 0,
-          "fields": [
-            {
-              "title": "payment_credential",
-              "$ref": "#/definitions/aiken~1transaction~1credential~1Credential"
-            },
-            {
-              "title": "stake_credential",
-              "$ref": "#/definitions/Option$aiken~1transaction~1credential~1Referenced$aiken~1transaction~1credential~1Credential"
-            }
-          ]
-        }
-      ]
-    },
-    "aiken/transaction/credential/Credential": {
-      "title": "Credential",
-      "description": "A general structure for representing an on-chain `Credential`.\n\n Credentials are always one of two kinds: a direct public/private key\n pair, or a script (native or Plutus).",
-      "anyOf": [
-        {
-          "title": "VerificationKeyCredential",
-          "dataType": "constructor",
-          "index": 0,
-          "fields": [
-            {
-              "$ref": "#/definitions/ByteArray"
-            }
-          ]
-        },
-        {
-          "title": "ScriptCredential",
-          "dataType": "constructor",
-          "index": 1,
-          "fields": [
-            {
-              "$ref": "#/definitions/ByteArray"
-            }
-          ]
-        }
-      ]
-    },
-    "aiken/transaction/credential/Referenced$aiken/transaction/credential/Credential": {
-      "title": "Referenced",
-      "description": "Represent a type of object that can be represented either inline (by hash)\n or via a reference (i.e. a pointer to an on-chain location).\n\n This is mainly use for capturing pointers to a stake credential\n registration certificate in the case of so-called pointer addresses.",
-      "anyOf": [
-        {
-          "title": "Inline",
-          "dataType": "constructor",
-          "index": 0,
-          "fields": [
-            {
-              "$ref": "#/definitions/aiken~1transaction~1credential~1Credential"
-            }
-          ]
-        },
-        {
-          "title": "Pointer",
-          "dataType": "constructor",
-          "index": 1,
-          "fields": [
-            {
-              "title": "slot_number",
-              "$ref": "#/definitions/Int"
-            },
-            {
-              "title": "transaction_index",
-              "$ref": "#/definitions/Int"
-            },
-            {
-              "title": "certificate_index",
-              "$ref": "#/definitions/Int"
-            }
-          ]
         }
       ]
     },
@@ -223,31 +95,6 @@
         }
       ]
     },
-    "profile/Action": {
-      "title": "Action",
-      "anyOf": [
-        {
-          "title": "Create",
-          "dataType": "constructor",
-          "index": 0,
-          "fields": [
-            {
-              "$ref": "#/definitions/profile~1UserProfile"
-            }
-          ]
-        },
-        {
-          "title": "Update",
-          "dataType": "constructor",
-          "index": 1,
-          "fields": [
-            {
-              "$ref": "#/definitions/profile~1UserProfile"
-            }
-          ]
-        }
-      ]
-    },
     "profile/UserProfile": {
       "title": "UserProfile",
       "anyOf": [
@@ -271,18 +118,6 @@
             {
               "title": "bio",
               "$ref": "#/definitions/String"
-            },
-            {
-              "title": "birthday",
-              "$ref": "#/definitions/String"
-            },
-            {
-              "title": "jointTime",
-              "$ref": "#/definitions/String"
-            },
-            {
-              "title": "address",
-              "$ref": "#/definitions/aiken~1transaction~1credential~1Address"
             }
           ]
         }

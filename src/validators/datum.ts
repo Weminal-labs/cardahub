@@ -12,9 +12,6 @@ const profileDatumSchema = Data.Object({
     name: Data.Bytes(),
     avatar: Data.Bytes(),
     bio: Data.Bytes(),
-    birthday: Data.Bytes(),
-    jointTime: Data.Bytes(),
-    address: Data.Bytes()
 })
 
 type profileDatum = Data.Static<typeof profileDatumSchema>;
