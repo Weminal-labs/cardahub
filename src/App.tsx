@@ -1,30 +1,27 @@
-import Navbar from './components/Navbar'
-import { useLucid } from './context/LucidProvider'
-import { useEffect } from 'react'
-import TransferAda from './components/cardano/TransferAda'
-import { Mint } from './components/cardano/Mint'
+import { Route, Routes } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Feed from './components/Feed/Feed';
+import { NFTMarket } from './components/NFTMarket/NFTMarket';
+import Navbar from './components/Navbar';
+import UserProfileComponent from './components/profile/Profile';
 
 function App() {
-  const { lucid, address, getUTxOs } = useLucid()
-  console.log(lucid)
-
-  useEffect(() => {
-    async function tmp() {
-      const utxos = await getUTxOs()
-      console.log("utxos", utxos)
-    }
-    tmp()
-  }, [address, getUTxOs])
-
   return (
-    <>
+    <div className="min-h-screen bg-cyber-bg-primary text-cyber-text-primary">
       <Navbar />
-      <p>{address}</p>
-      <TransferAda />
-      <Mint />
-    </>
-  )
+      <div className="flex">
+        <Sidebar />
+        <main className="flex-1 ml-64 p-6">
+          <Routes>
+            <Route path="/profile" element={<UserProfileComponent />} />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/nft-market" element={<NFTMarket />} />
+            <Route path="/" element={<Feed />} />
+          </Routes>
+        </main>
+      </div>
+    </div>
+  );
 }
 
-
-export default App
+export default App;
